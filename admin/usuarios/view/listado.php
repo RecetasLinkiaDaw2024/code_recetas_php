@@ -2,14 +2,14 @@
 //TODO: seguridad, aplicar para admistrador
 require_once(__DIR__."/../../../data/usuarios.php");
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <!-- TODO estilos de la aplicacion css -->
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- iconos de material icons de google, para ver los disaponibles mirar https://fonts.google.com/icons?icon.set=Material+Icons-->
 <!-- TODO levar estos estilos css estilos-->
 <style>
 
@@ -39,6 +39,7 @@ require_once(__DIR__."/../../../data/usuarios.php");
 <body>
 <header>
         <!-- TODO: insertar la cabecera -->
+
 </header>
 </body>
 <article>
@@ -51,8 +52,13 @@ require_once(__DIR__."/../../../data/usuarios.php");
                     echo "<input type=\"text\" name=\"busqueda\">";
                 }
             ?>            
-            <input type="submit" name="buscar" value="Buscar">
-            <input type="submit" name="nuevo" value="Nuevo" onclick="window.location='view/formulario.php';return false;">
+            <button type="submit" name="buscar" value="Buscar">
+            <i class="material-icons" title="Buscar">search</i>                
+            </button>
+            <button name="nuevo" value="Nuevo" onclick="window.location='view/formulario.php';return false;">
+            <span class="material-icons"  title="Nuevo usuario">person_add</span>                
+            </button>
+            
         </div>
     </form>
 <div class="resultados_busqueda">
@@ -67,6 +73,7 @@ require_once(__DIR__."/../../../data/usuarios.php");
         echo "<b>".$usuario['nombre']."</b>";
         echo "<p>".$usuario['email']."</p>";
         //TODO: poner botones eliminar y editar (font-awesome???)
+        
         echo "</div>";
     }
 ?>
@@ -75,4 +82,11 @@ require_once(__DIR__."/../../../data/usuarios.php");
 <footer>
         <!-- TODO: insertar el footer -->
 </footer>
+
+<?php
+//logica para capturar que hay un mensaje que mostrar...
+if (isset($_GET['mensaje']) && $_GET['mensaje']=="OkGrabar" ){
+    echo "<script> alert(\"Los datos se han guardado correctamente\");</script>";//TODO: mejoraremos el mensaje con estuilos y funciones javascript   mas adelante....
+}
+?>
 </html>

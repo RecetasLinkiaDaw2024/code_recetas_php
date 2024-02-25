@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     $datos['email']=$_POST['email'];
     $datos['clave_acceso']=$_POST['password'];
     createUsuario($datos);
-    header('Location: listado.php');
+    header('Location: ../?mensaje=OkGrabar');
 }
 
 ?>
@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 <html lang="es">
 <head>
 <!-- TODO estilos de la aplicacion css -->
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+<!-- iconos de material icons de google, para ver los disaponibles mirar https://fonts.google.com/icons?icon.set=Material+Icons-->
 <!-- TODO levar estos estilos css estilos-->
 </style>
 </head>
@@ -39,7 +40,13 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
         <input type="text" name="nombre" id="nombre">
         <label for="password">Password:</label>
         <input type="password" name="password" id="password">
-        <input type="submit" value="Guardar">
+        <button type="submit" value="Guardar">
+            <span class="material-icons-outlined">save</span><span>GUARDAR</span>
+        </button>
+        <button value="Cancelar" onclick="window.location='../';return false;">
+            <span class="material-icons-outlined">cancel</span><span>VOLVER</span>
+        </button>
+
     </form>
 </section>
 </article>
