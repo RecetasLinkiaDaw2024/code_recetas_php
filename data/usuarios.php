@@ -8,13 +8,13 @@ function getUsuarioById($id){
 
 //TODO: Pendiente ver que filtros pueden hacer falta, por ahora solo el autor
 //TODO: Necesita una ordenación?
-function findUsuarios($email){
+function findUsuarios($busqueda){
     $conn = conectar_db();
 
 //BLOQUE DE CONDICIONES  
     $condiciones ="";
-    if (!empty($email)){
-        $condiciones ="where email LIKE ?";
+    if (!empty($busqueda)){
+        $condiciones ="where email LIKE ? or nombre LIKE ?";
     }
 //
 
@@ -25,8 +25,9 @@ function findUsuarios($email){
     }    
 
 //BLOQUE DE BIND FILTROS , hay que hacerlo en el mismo oreden que las condiciones
-    if (!empty($email)){
-        $stmt->bind_param("s", $email);
+    if (!empty($busqueda)){
+        $patron = "%".$busqueda."%";
+        $stmt->bind_param("ss", $patron,$patron );
     }
 //  
 
@@ -35,15 +36,15 @@ function findUsuarios($email){
     }
     
     $result = $stmt->get_result();    
-    $rows = array();
+    $array_de_retorno = array();
     while ($row = $result->fetch_assoc()) {
-        array_push($rows, $row);
+        array_push($array_de_retorno, $row);
     }
 
 //cerramos todo    
     $stmt->close();
     $conn->close();
-    return $rows;
+    return $array_de_retorno;
 }
 
 /**
@@ -54,9 +55,7 @@ function findUsuarios($email){
 function createUsuario($data){
     $conn = conectar_db();
     $stmt = $conn->prepare("insert INTO USUARIOS (nombre, clave_acceso, email) VALUES(?,?,?)");
-    $stmt->bind_param("s", $data['nombre']);
-    $stmt->bind_param("s", $data['clave_acceso']);
-    $stmt->bind_param("s", $data['email']);
+    $stmt->bind_param("sss", $data['nombre'], $data['clave_acceso'], $data['email']);
 
     if (!$stmt->execute()) {
         die("Error al ejecutar el guardado: " . $stmt->error);
