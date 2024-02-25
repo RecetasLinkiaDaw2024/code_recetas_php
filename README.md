@@ -1,2 +1,2 @@
 # code_recetas_php
-Proyecto PHP donde tendremos el fuente del portal
+Proyecto PHP donde tendremos el fuente del portal.
