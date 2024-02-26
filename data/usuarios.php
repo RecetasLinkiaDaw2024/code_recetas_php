@@ -80,10 +80,10 @@ function editUsuario($id, $data){
     $stmt = $conn->prepare("update USUARIOS SET $seteos where id_usuario = ?");
     
 //estos binds hay quye ponerlos en orden alfabetico    
-    bindIfExist("clave_acceso",$data,"s",$stmt);
-    bindIfExist("email",$data,"s",$stmt);
-    bindIfExist("nombre",$data,"s",$stmt);    
-    $stmt->bind_param("i", $id);//el ultimo es el id
+    $pos=bindIfExist(1,"clave_acceso",$data,PDO::PARAM_STR,$stmt);
+    $pos=bindIfExist($pos,"email",$data,PDO::PARAM_STR,$stmt);
+    $pos=bindIfExist($pos,"nombre",$data,PDO::PARAM_STR,$stmt);
+    $stmt->bindParam($pos, $id, PDO::PARAM_INT);//el ultimo es el id
     $conn->close();
 }
 

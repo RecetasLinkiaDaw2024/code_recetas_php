@@ -57,9 +57,10 @@ function deleteRegistroByID($sql,$id){
     $conn->close();
 }
 
-function bindIfExist($nombreVar,$data,$tipo,$stmt){
+function bindIfExist($pos,$nombreVar,$data,$tipo,$stmt){
     if (array_key_exists($nombreVar, $data)) {
-        $stmt->bind_param($tipo, $data[$nombreVar]);
+        $stmt->bindParam($pos,$data[$nombreVar],$tipo);
+        return ($pos+1);
     }
 }
 
