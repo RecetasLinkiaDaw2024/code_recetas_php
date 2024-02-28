@@ -65,7 +65,6 @@ button.link:hover{
         <!-- TODO: insertar la cabecera -->
 
 </header>
-</body>
 <article>
     <form action="" method="GET">
         <div class="buscador">
@@ -76,6 +75,7 @@ button.link:hover{
                     echo "<input type=\"text\" name=\"busqueda\">";
                 }
             ?>            
+            
             <button type="submit" name="buscar" value="Buscar">
             <i class="material-icons" title="Buscar">search</i>                
             </button>
@@ -93,18 +93,17 @@ button.link:hover{
             $usuarios = findUsuarios(null);
         }
         foreach ($usuarios as $usuario) {
-        echo "<div class=\"panel_usuario\">";
-        echo "<b>".$usuario['nombre']."</b>";
-        echo "<p>".$usuario['email']."</p>";
-        //TODO: poner botones eliminar y editar (font-awesome???)
-        echo "<button class=\"link link-editar\" name=\"editar\" value=\"editar\" onclick=\"window.location='view/formulario.php?id-user=".$usuario['id_usuario']."';return false;\">";
-        echo "    <span class=\"material-icons\"  title=\"Editar usuario\">edit</span>                ";
-        echo "</button>";
-        echo "<button class=\"link\" name=\"eliminar\" value=\"Eliminar\" onclick=\"window.location='view/formulario.php';return false;\">";
-        echo "    <span class=\"material-icons\"  title=\"Editar usuario\">delete</span>                ";
-        echo "</button>";
-        echo "</div>";
-    }
+            echo "<div class=\"panel_usuario\">";
+            echo "<b>".$usuario['nombre']."</b>";
+            echo "<p>".$usuario['email']."</p>";
+            echo "<button class=\"link link-editar\" name=\"editar\" value=\"editar\" onclick=\"window.location='view/formulario.php?id-user=".$usuario['id_usuario']."';return false;\">";
+            echo "    <span class=\"material-icons\"  title=\"Editar usuario\">edit</span>                ";
+            echo "</button>";
+            echo "<button class=\"link\" name=\"eliminar\" value=\"Eliminar\" onclick=\"window.location='view/formulario.php';return false;\">";
+            echo "    <span class=\"material-icons\"  title=\"Editar usuario\">delete</span>                ";
+            echo "</button>";
+            echo "</div>";
+        }
 ?>
 </div>
 </article>
@@ -118,4 +117,6 @@ if (isset($_GET['mensaje']) && $_GET['mensaje']=="OkGrabar" ){
     echo "<script> alert(\"Los datos se han guardado correctamente\");</script>";//TODO: mejoraremos el mensaje con estuilos y funciones javascript   mas adelante....
 }
 ?>
+</body>
+
 </html>

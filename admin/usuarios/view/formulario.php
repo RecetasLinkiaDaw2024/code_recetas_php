@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 <header>
         <!-- TODO: insertar la cabecera -->
 </header>
-</body>
 <article>
 <section class="seccion"><h2>Nuevo usuario</h2></section><!-- TODO: cambiar cuando editamos-->
 <section class="seccion">
@@ -90,4 +89,6 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 <footer>
         <!-- TODO: insertar el footer -->
 </footer>
+</body>
+
 </html>
