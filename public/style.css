@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+    text-decoration: none;
+    list-style: none; 
+}
+
+body {
+
+    background: linear-gradient(
+        90deg,
+        rgb(63, 187, 201)25%,
+        rgb(4, 51, 56)75%);
+        font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.back {
+  padding: 75px 0;
+  background-color: rgb(76, 10, 208); 
+}
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 150px;
+    margin-right: 10px;
+}
+
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+}
+
+.menu .navbar ul li a {
+    font-size: 20px;
+    padding: 30px;
+    color: white;
+    display: block;
+}
+
+.menu .navbar ul li a:hover {
+    color: red;
+}
+
+#menu {
+    display: none;
+}
+
+.menu-icono {
+    width: 25px;
+}
+
+.menu label {
+    cursor: pointer;
+    display: none;
+}
+
+.nosotros {
+    position: relative;
+        padding: 100px 0;
+    display: flex;
+    align-items: center;
+}
+
+.nosotros-info{
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+.nosotros-img{
+    width: 50%;
+}
+
+.nosotros-img img{
+    width: 450px;
+}
+
+.nosotros-txt{
+    width: 50%;
+}
+
+.nosotros-txt span{
+    font-size: 60px;
+    color: yellow;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.nosotros-txt h2{
+    font-size: 40px;
+    color: rgb(149, 138, 229);
+    margin-bottom: 30px;
+}
+
+.nosotros-txt p{
+    font-size: 20px;
+    color: black;
+    margin-bottom: 50px;
+}
+
+.info{
+    padding: 20px 0;
+    text-align: center;
+}
+
+.info h3{
+    font-size: 40px;
+    color: rgb(224, 25, 41);
+    margin-bottom: 30px;
+}
+
+.info p{
+    font-size: 18px;
+    color: white;
+    margin-bottom: 70px;
+    padding: 0 200px;
+}
+ hr{
+    border: 5px solid #EEE;
+ }
+  .footer{
+    padding: 20px 200px;
+  }
+
+  .footer-links{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .links h4{
+    font-size: 30px;
+    color: rgb(20, 49, 211);
+    margin-bottom: 20px;
+  }
+
+.socials img{
+    margin-right: 15px;
+}
+
+@media(max-width:900px){
+
+        .menu {
+            padding: 30px;
+        }
+
+        .menu label {
+            display: initial;
+        }
+
+        .back {
+            padding: 40px 0px;
+        }
+
+        .menu .navbar {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: rgb(76, 10, 208) ;
+            display: none;
+        }
+
+        .menu .navbar ul li {
+            width: 100%;
+        }
+
+        #menu:checked ~ .navbar {
+            display: initial;
+        }
+}
