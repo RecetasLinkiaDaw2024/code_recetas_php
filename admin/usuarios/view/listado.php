@@ -96,12 +96,15 @@ button.link:hover{
             echo "<div class=\"panel_usuario\">";
             echo "<b>".$usuario['nombre']."</b>";
             echo "<p>".$usuario['email']."</p>";
+            echo "<form method=\"POST\" action=\"view/eliminar_usuario.php\" onSubmit=\"return confirm(\"Esta seguro de querer borrar a ".$usuario['nombre']."\")\">";
             echo "<button class=\"link link-editar\" name=\"editar\" value=\"editar\" onclick=\"window.location='view/formulario.php?id-user=".$usuario['id_usuario']."';return false;\">";
             echo "    <span class=\"material-icons\"  title=\"Editar usuario\">edit</span>                ";
             echo "</button>";
-            echo "<button class=\"link\" name=\"eliminar\" value=\"Eliminar\" onclick=\"window.location='view/formulario.php';return false;\">";
+            echo "<button type=\"submit\" class=\"link\" name=\"eliminar\" value=\"Eliminar\" \">";
             echo "    <span class=\"material-icons\"  title=\"Editar usuario\">delete</span>                ";
             echo "</button>";
+            echo "<input type=\"hidden\" name=\"id_usuario\"  value=\"".$usuario['id_usuario']."\"/>"; 
+            echo "</form>";
             echo "</div>";
         }
 ?>
@@ -114,8 +117,18 @@ button.link:hover{
 <?php
 //logica para capturar que hay un mensaje que mostrar...
 if (isset($_GET['mensaje']) && $_GET['mensaje']=="OkGrabar" ){
-    echo "<script> alert(\"Los datos se han guardado correctamente\");</script>";//TODO: mejoraremos el mensaje con estuilos y funciones javascript   mas adelante....
+    echo "<script> window.addEventListener('load', function() {
+        alert(\"Los datos se han guardado correctamente\");
+      });</script>";
 }
+if (isset($_GET['mensaje']) && $_GET['mensaje']=="OkErase" ){
+    echo "<script> window.addEventListener('load', function() {
+        alert(\"Se ha eliminado el usuario correctamente\");
+      });</script>";
+}
+
+
+
 ?>
 </body>
 

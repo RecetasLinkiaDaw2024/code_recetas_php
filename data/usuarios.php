@@ -76,19 +76,20 @@ function editUsuario($id, $data){
     foreach ($data as $clave => $valor) {
         array_push($seteosArray, "$clave = ?");
     }
-    $seteos="";
+    $seteos=implode(", ", $seteosArray);
     $stmt = $conn->prepare("update USUARIOS SET $seteos where id_usuario = ?");
     
 //estos binds hay quye ponerlos en orden alfabetico    
-    $pos=bindIfExist(1,"clave_acceso",$data,PDO::PARAM_STR,$stmt);
-    $pos=bindIfExist($pos,"email",$data,PDO::PARAM_STR,$stmt);
-    $pos=bindIfExist($pos,"nombre",$data,PDO::PARAM_STR,$stmt);
-    $stmt->bindParam($pos, $id, PDO::PARAM_INT);//el ultimo es el id
+    $stmt->bind_param("sssi", $data['clave_acceso'],$data['email'],$data['nombre'],$id);
+
+    if (!$stmt->execute()) {
+        die("Error al ejecutar el guardado: " . $stmt->error);
+    }
     $conn->close();
 }
 
-function deleteUsuario($id){
-    return deleteRegistroByID("delete FROM USUARIOS WHERE id_usuario = ? CASCADE",$id);
+function deleteUsuario($id){ //TODO: eliminar lo que ha hecho el usuario???
+    return deleteRegistroByID("delete FROM USUARIOS WHERE id_usuario = ?",$id);
 }
 
 ?>

@@ -64,11 +64,11 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 <section class="seccion">
     <form method="POST" class="formulario">                
         <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" value="<?= $data_usuario['nombre'] ?>">
+        <input type="text" name="nombre" id="nombre" value="<?= $data_usuario['nombre'] ?>" required>
         <label for="email">Email:</label>
-        <input type="text" name="email" id="email" value="<?= $data_usuario['email'] ?>">
+        <input type="text" name="email" id="email" value="<?= $data_usuario['email'] ?>" required>
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" required>
         <div class="botonera">
         <button type="submit" value="Guardar">
             <span class="material-icons-outlined">save</span><span>GUARDAR</span>
