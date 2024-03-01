@@ -92,4 +92,33 @@ function deleteUsuario($id){ //TODO: eliminar lo que ha hecho el usuario???
     return deleteRegistroByID("delete FROM USUARIOS WHERE id_usuario = ?",$id);
 }
 
+
+//login de usuario. busca en BBDD un usuario con un email y clave y lo retorna si lo encuentra.
+function login($email,$clave){
+    $sql = "SELECT * FROM usuarios WHERE email= ? AND clave_acceso=?"; //TODO: cifrar
+    $conn = conectar_db();
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $mysqli->error);
+    }    
+    $stmt->bind_param("ss", $email,$clave);
+    if (!$stmt->execute()) {
+        die("Error al ejecutar la consulta: " . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();    
+    
+    //solo se espera un resultado
+    if ($result->num_rows === 0) {
+        $row = null;//no hay datos
+    }else{
+        $row = $result->fetch_assoc();
+    }
+
+//cerramos todo    
+    $stmt->close();
+    $conn->close();
+    return $row;
+}
+
 ?>
