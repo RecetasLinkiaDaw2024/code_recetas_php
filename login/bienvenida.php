@@ -1,14 +1,8 @@
 <?php
-session_start();
-
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
-    exit();
-}
+require_once(__DIR__."/../security/controller/check_user.php");
 
 // Obtener datos del usuario de la sesión
-$user = $_SESSION['user'];
+$user =getUserLogado();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +18,16 @@ $user = $_SESSION['user'];
     </header>
     <main class="container">
         <section class="welcome-container">
-            <h2>Bienvenido, <?php echo $user['nombre']; ?>!</h2>
+            <h2>Bienvenido, <?php echo $user->getNombre(); ?>!</h2>
             <!-- Aquí puedes agregar más contenido de bienvenida si lo deseas -->
             <a href="logout.php">Cerrar sesión</a>
+            <!-- vamos a meter un enlace a la gestion de usuarios solo si eres administrador-->
+            <?php 
+            if ($user->getIsAdmin() == true){
+                echo '<a href="../admin/usuarios">Administrar usuarios</a>';
+            }
+            ?>
+
         </section>
     </main>
 </body>

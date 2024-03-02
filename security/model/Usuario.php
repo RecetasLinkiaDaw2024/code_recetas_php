@@ -9,9 +9,13 @@ class Usuario {
 
     public function __construct($id, $nombre,$email, $isAdmin) {
         $this->id = $id;
-        $this->email = $email;
-        $this->isAdmin = $isAdmin;
+        $this->email = $email;       
         $this->nombre = $nombre;
+        if (isset( $isAdmin)){
+            $this->isAdmin = $isAdmin;
+        }else{
+            $this->isAdmin = false;
+        }
     }
 
     // Getters y setters
@@ -52,6 +56,24 @@ class Usuario {
     public function saludar() {
         echo "Hola, " . $this->nombre . "<" . $this->email . ">.";
     }
+
+    public function serialize() {
+        return serialize([
+          'id' => $this->id,
+          'email' => $this->email,
+          'isAdmin' => $this->isAdmin,
+          'nombre' => $this->nombre,
+        ]);
+      }
+    
+      public function unserialize($data) {
+        $data = unserialize($data);
+        $this->nombre = $data['nombre'];
+        $this->email = $data['email'];
+        $this->id = $data['id'];
+        $this->isAdmin = $data['isAdmin'];
+      }
+
 }
 
 

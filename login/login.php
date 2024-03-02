@@ -1,17 +1,16 @@
 <?php
 session_start();
-require_once(__DIR__."/../../../data/usuarios.php");
-require_once(__DIR__."/../../../security/model/usuario.php");
+require_once(__DIR__."/../config/settings.php");
+require_once(__DIR__."/../data/usuarios.php");
+require_once(__DIR__."/../security/model/usuario.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $result = login($_POST['login-email'],$_POST['login-password']);
-    if ($result->num_rows > 0) {
-        // Inicio de sesión exitoso
-        $data = $result->fetch_assoc();
-        $usuario = new Usuario($data['id_usuario'],$data['nombre'],$data['email'],$data['es_admin']);
+    $data = login($_POST['login-email'],$_POST['login-password']);
+    if (isset($data)) {
+        $usuario = new Usuario($data['id_usuario'],$data['nombre'],$data['email'],$data['es_administrador']);
 
         // Guardar datos del usuario en la sesión
-        $_SESSION['user'] = $usuario;
+        $_SESSION[SESSION_USER] = $usuario->serialize();
 
         // Redirigir a la pantalla de bienvenida
         header("Location: bienvenida.php");

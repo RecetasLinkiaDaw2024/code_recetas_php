@@ -1,6 +1,7 @@
 <?php
 //TODO: seguridad, aplicar para admistrador
 require_once(__DIR__."/../../../data/usuarios.php");
+require_once(__DIR__."/../../../security/controller/check_user_admin.php");
 
 ?>
 <!DOCTYPE html>
@@ -33,8 +34,8 @@ require_once(__DIR__."/../../../data/usuarios.php");
     background: lightgrey;
     border: 1px;
     width: 150px;
-    min-height: 100px;
-    max-height: 150px;
+    min-height: 120px;
+    max-height: 160px;
     margin: 5px;
     text-align: center;
     position: relative;
@@ -58,6 +59,7 @@ button.link:hover{
   text-decoration: none;
   background: #CCCCCC;
 }
+
 </style>
 </head>
 <body>
@@ -96,6 +98,10 @@ button.link:hover{
             echo "<div class=\"panel_usuario\">";
             echo "<b>".$usuario['nombre']."</b>";
             echo "<p>".$usuario['email']."</p>";
+            if($usuario['es_administrador'] == true){
+                echo "<p><b>Administrador<b></p>"; //TODO: darle una vuelta con colores o iconos, no solo la palabra
+            }
+            
             echo "<form method=\"POST\" action=\"view/eliminar_usuario.php\" onSubmit=\"return confirm(\"Esta seguro de querer borrar a ".$usuario['nombre']."\")\">";
             echo "<button class=\"link link-editar\" name=\"editar\" value=\"editar\" onclick=\"window.location='view/formulario.php?id-user=".$usuario['id_usuario']."';return false;\">";
             echo "    <span class=\"material-icons\"  title=\"Editar usuario\">edit</span>                ";
