@@ -1,45 +1,24 @@
 <?php
 session_start();
+require_once(__DIR__."/../config/settings.php");
+require_once(__DIR__."/../data/usuarios.php");
+require_once(__DIR__."/../security/model/usuario.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Conexión a la base de datos
-    $servername = "localhost";
-    $username = "usuario";
-    $password = "contraseña";
-    $dbname = "nombre_base_de_datos";
-
-    // Crear conexión
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
-
-    // Recuperar datos del formulario
-    $email = $_POST['login-email'];
-    $password = $_POST['login-password'];
-
-    // Consulta SQL para verificar las credenciales del usuario
-    $sql = "SELECT * FROM usuarios WHERE email='$email' AND clave_acceso='$password'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // Inicio de sesión exitoso
-        $row = $result->fetch_assoc();
+    $data = login($_POST['login-email'],$_POST['login-password']);
+    if (isset($data)) {
+        $usuario = new Usuario($data['id_usuario'],$data['nombre'],$data['email'],$data['es_administrador']);
 
         // Guardar datos del usuario en la sesión
-        $_SESSION['user'] = $row;
+        $_SESSION[SESSION_USER] = $usuario->serialize();
 
         // Redirigir a la pantalla de bienvenida
-        header("Location: welcome.php");
+        header("Location: bienvenida.php");
         exit();
     } else {
         // Credenciales incorrectas, mostrar mensaje de error
         $error_message = "Usuario o contraseña incorrectos";
     }
-
-    $conn->close();
 }
 ?>
 <!DOCTYPE html>

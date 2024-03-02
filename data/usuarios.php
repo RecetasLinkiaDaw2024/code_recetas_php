@@ -54,8 +54,8 @@ function findUsuarios($busqueda){
  */
 function createUsuario($data){
     $conn = conectar_db();
-    $stmt = $conn->prepare("insert INTO USUARIOS (nombre, clave_acceso, email) VALUES(?,?,?)");
-    $stmt->bind_param("sss", $data['nombre'], $data['clave_acceso'], $data['email']);
+    $stmt = $conn->prepare("insert INTO USUARIOS (nombre, clave_acceso, email,es_administrador) VALUES(?,?,?,?)");
+    $stmt->bind_param("sssi", $data['nombre'], $data['clave_acceso'], $data['email'],$data['es_administrador']);
 
     if (!$stmt->execute()) {
         die("Error al ejecutar el guardado: " . $stmt->error);
@@ -70,6 +70,9 @@ function createUsuario($data){
  * 
 */
 function editUsuario($id, $data){
+    if (!isset($data['es_administrador'])){
+        $data['es_administrador']=false;//falso por omision
+    }
     ksort($data);
     $conn = conectar_db();
     $seteosArray=array();
@@ -80,7 +83,8 @@ function editUsuario($id, $data){
     $stmt = $conn->prepare("update USUARIOS SET $seteos where id_usuario = ?");
     
 //estos binds hay quye ponerlos en orden alfabetico    
-    $stmt->bind_param("sssi", $data['clave_acceso'],$data['email'],$data['nombre'],$id);
+    $esadmin=$data['es_administrador']==true?1:0;
+    $stmt->bind_param("ssisi", $data['clave_acceso'],$data['email'],$esadmin,$data['nombre'],$id);
 
     if (!$stmt->execute()) {
         die("Error al ejecutar el guardado: " . $stmt->error);
@@ -90,6 +94,35 @@ function editUsuario($id, $data){
 
 function deleteUsuario($id){ //TODO: eliminar lo que ha hecho el usuario???
     return deleteRegistroByID("delete FROM USUARIOS WHERE id_usuario = ?",$id);
+}
+
+
+//login de usuario. busca en BBDD un usuario con un email y clave y lo retorna si lo encuentra.
+function login($email,$clave){
+    $sql = "SELECT * FROM USUARIOS WHERE email= ? AND clave_acceso=?"; //TODO: cifrar
+    $conn = conectar_db();
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $mysqli->error);
+    }    
+    $stmt->bind_param("ss", $email,$clave);
+    if (!$stmt->execute()) {
+        die("Error al ejecutar la consulta: " . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();    
+    
+    //solo se espera un resultado
+    if ($result->num_rows === 0) {
+        $row = null;//no hay datos
+    }else{
+        $row = $result->fetch_assoc();
+    }
+
+//cerramos todo    
+    $stmt->close();
+    $conn->close();
+    return $row;
 }
 
 ?>

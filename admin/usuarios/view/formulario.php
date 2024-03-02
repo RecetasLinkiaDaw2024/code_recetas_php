@@ -9,7 +9,11 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     $datos['nombre']=$_POST['nombre'];
     $datos['email']=$_POST['email'];
     $datos['clave_acceso']=$_POST['password'];
-
+    if (isset($_POST['administrador']) && $_POST['administrador'] == "es_administrador"){
+        $datos['es_administrador']=true;
+    }else{
+        $datos['es_administrador']=false;
+    }
     if(empty($_POST['id_usuario'])){//sino hay id creamos
         createUsuario($datos);
     }else{
@@ -21,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     if (isset($_GET['id-user'])){
         $data_usuario=getUsuarioById($_GET['id-user']);
     }else{
-        $data_usuario=array("nombre"=>"", "email"=>"", "clave_acceso"=>"");
+        $data_usuario=array("nombre"=>"", "email"=>"", "clave_acceso"=>"","es_administrador"=>"");
     }
 }
 
@@ -69,6 +73,14 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
         <input type="text" name="email" id="email" value="<?= $data_usuario['email'] ?>" required>
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" required>
+        <div>
+            <input type="checkbox" id="administrador" name="administrador" value="es_administrador" <?php
+            if ($data_usuario['es_administrador'] == true){
+                echo " checked ";
+            }
+            ?>>
+            <label for="administrador">Marcar como administrador</label>
+        </div>
         <div class="botonera">
         <button type="submit" value="Guardar">
             <span class="material-icons-outlined">save</span><span>GUARDAR</span>

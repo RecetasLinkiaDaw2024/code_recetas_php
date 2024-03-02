@@ -7,5 +7,9 @@
 //ejemplo
 //define("DB_SERVER","sql.freedb.tech");
 
+//nombre que se le da en el array de sesion a los datos del usuario logado.
+define("SESSION_USER","usuario");
 
+//contexto de despliegue, es la subruta de despliegue dentro de localhost. Se usa en redirecciones por cabecera que no puedan ser relativas
+define("DEPLOY_PATH",'/code_recetas_php');
 ?>
