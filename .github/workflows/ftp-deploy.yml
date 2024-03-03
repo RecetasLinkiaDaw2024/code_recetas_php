@@ -19,3 +19,6 @@ jobs:
         server: ftpupload.net
         username: if0_35940949
         password: EfAdLYbbBYGluq5
+        local-dir: ./
+        server-dir: /htdocs/code_recetas_php/
+        dangerous-clean-slate: true
