@@ -17,8 +17,8 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftpupload.net
-        username: if0_35940949
-        password: EfAdLYbbBYGluq5
+        username: ${{ secrets.SERVER_FTP_USERNAME}}
+        password: ${{ secrets.SERVER_FTP_KEY}}
         local-dir: ./
         server-dir: /htdocs/code_recetas_php/
         dangerous-clean-slate: true
