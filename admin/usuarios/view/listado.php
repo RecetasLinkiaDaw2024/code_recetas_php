@@ -33,7 +33,7 @@ require_once(__DIR__."/../../../security/controller/check_user_admin.php");
 .panel_usuario{
     background: lightgrey;
     border: 1px;
-    width: 150px;
+    width: 200px;
     min-height: 120px;
     max-height: 160px;
     margin: 5px;
@@ -101,8 +101,8 @@ button.link:hover{
             if($usuario['es_administrador'] == true){
                 echo "<p><b>Administrador<b></p>"; //TODO: darle una vuelta con colores o iconos, no solo la palabra
             }
-            
-            echo "<form method=\"POST\" action=\"view/eliminar_usuario.php\" onSubmit=\"return confirm(\"Esta seguro de querer borrar a ".$usuario['nombre']."\")\">";
+            echo "<br/>";
+            echo "<form method=\"POST\" action=\"view/eliminar_usuario.php\" onsubmit=\"return confirm('¿Esta seguro de querer borrar a ".$usuario['nombre']."?');\">";
             echo "<button class=\"link link-editar\" name=\"editar\" value=\"editar\" onclick=\"window.location='view/formulario.php?id-user=".$usuario['id_usuario']."';return false;\">";
             echo "    <span class=\"material-icons\"  title=\"Editar usuario\">edit</span>                ";
             echo "</button>";

@@ -1,0 +1,24 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: FTP Deploy to server
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["develop"]
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftpupload.net
+        username: ${{ secrets.SERVER_FTP_USERNAME}}
+        password: ${{ secrets.SERVER_FTP_KEY}}
+        local-dir: ./
+        server-dir: /htdocs/code_recetas_php/
+        dangerous-clean-slate: true

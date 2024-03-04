@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" value="<?= $data_usuario['nombre'] ?>" required>
         <label for="email">Email:</label>
-        <input type="text" name="email" id="email" value="<?= $data_usuario['email'] ?>" required>
+        <input type="email" name="email" id="email" value="<?= $data_usuario['email'] ?>" required>
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" required>
         <div>
@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
             ?>>
             <label for="administrador">Marcar como administrador</label>
         </div>
+        
         <div class="botonera">
         <button type="submit" value="Guardar">
             <span class="material-icons-outlined">save</span><span>GUARDAR</span>
