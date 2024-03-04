@@ -10,8 +10,8 @@ body {
 
     background: linear-gradient(
         90deg,
-        rgb(63, 187, 201)25%,
-        rgb(4, 51, 56)75%);
+        rgb(250, 250, 250)25%,
+        rgb(196, 200, 200)75%);
         font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -21,7 +21,7 @@ body {
 }
 .back {
   padding: 75px 0;
-  background-color: rgb(76, 10, 208); 
+  background-color: rgb(81, 115, 81); 
 }
 
 .menu {
@@ -58,7 +58,7 @@ body {
 }
 
 .menu .navbar ul li a:hover {
-    color: red;
+    color: rgb(255, 166, 0);
 }
 
 #menu {
@@ -76,13 +76,13 @@ body {
 
 .nosotros {
     position: relative;
-        padding: 100px 0;
+    padding: 10px 0;
     display: flex;
     align-items: center;
 }
 
 .nosotros-info{
-    padding: 20px 0;
+    padding: 10px 0;
     display: flex;
     align-items: center;
 }
@@ -100,15 +100,15 @@ body {
 }
 
 .nosotros-txt span{
-    font-size: 60px;
-    color: yellow;
+    font-size: 40px;
+    color: red;
     font-weight: 700;
     margin-bottom: 25px;
 }
 
 .nosotros-txt h2{
-    font-size: 40px;
-    color: rgb(149, 138, 229);
+    font-size: 25px;
+    color:rgb(255, 166, 0);
     margin-bottom: 30px;
 }
 
@@ -118,6 +118,27 @@ body {
     margin-bottom: 50px;
 }
 
+.slider{
+background-color: rgb(81, 115, 81);
+position: relative;
+padding: 10px 0;
+display: flex;
+align-items: center;
+}
+
+.galeria{
+    padding: 16px;
+}
+
+.galeria-images{
+    display: flex;
+}
+
+.galeria-images img{
+    width: 100%;
+    
+}
+
 .info{
     padding: 20px 0;
     text-align: center;
@@ -125,37 +146,57 @@ body {
 
 .info h3{
     font-size: 40px;
-    color: rgb(224, 25, 41);
+    color: rgb(81, 115, 81);
     margin-bottom: 30px;
 }
 
 .info p{
     font-size: 18px;
-    color: white;
+    color: black;
     margin-bottom: 70px;
     padding: 0 200px;
 }
  hr{
-    border: 5px solid #EEE;
+    border: 5px solid #0f0e0e;
  }
   .footer{
-    padding: 20px 200px;
+    background-color: rgb(81, 115, 81);
+    padding: 20px 0;
+  }
+
+  .footer-row{
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .footer-links{
-    display: flex;
-    justify-content: space-between;
+    width: 25%;
+    padding: 0 15px;
   }
 
-  .links h4{
+  .footer-links h4{
     font-size: 30px;
-    color: rgb(20, 49, 211);
+    color: black;
     margin-bottom: 20px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    display: inline-block;
   }
 
-.socials img{
-    margin-right: 15px;
-}
+  .footer-links ul li a {
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    margin-bottom: 15px;
+    transition: all .3s ease;
+  }
+
+  .footer-links ul li a:hover{
+    color: rgb(255, 166, 0);
+    padding-left: 20px;
+  }
+
 
 @media(max-width:900px){
 
@@ -176,7 +217,7 @@ body {
             top: 100%;
             left: 0;
             right: 0;
-            background-color: rgb(76, 10, 208) ;
+            background-color: rgb(81, 115, 81) ;
             display: none;
         }
 
@@ -186,5 +227,12 @@ body {
 
         #menu:checked ~ .navbar {
             display: initial;
+        }
+        .footer-row {
+            text-align: center;
+        }
+        .footer-links {
+            width: 100%;
+            margin-bottom: 30px;
         }
 }
