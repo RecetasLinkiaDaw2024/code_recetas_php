@@ -5,7 +5,7 @@ require_once(__DIR__."/../model/usuario.php");
 
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION[SESSION_USER])) {
-    header("Location: ".DEPLOY_PATH."/login/login.php");//TODO: nos planteamos una pantalla intermedia de mensaje de redirección??
+    header("Location: ".DEPLOY_PATH."/login/login.html");//TODO: nos planteamos una pantalla intermedia de mensaje de redirección??
     exit();
 }
 //vamos a definir dos metodos para trabajar el usuario en sesion

@@ -14,12 +14,19 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     }else{
         $datos['es_administrador']=false;
     }
-    if(empty($_POST['id_usuario'])){//sino hay id creamos
-        createUsuario($datos);
+
+    if (verifica_email($datos['email'],$_POST['id_usuario'])==false){
+        header('Location: ../?mensaje=NoOkEmail');
     }else{
-        editUsuario($_POST['id_usuario'],$datos); //si hay id, actualizamos
+
+        if(empty($_POST['id_usuario'])){//sino hay id creamos
+            createUsuario($datos);
+            header('Location: ../?mensaje=OkGrabar');
+        }else{
+            editUsuario($_POST['id_usuario'],$datos); //si hay id, actualizamos
+            header('Location: ../?mensaje=OkGrabar');
+        }
     }
-    header('Location: ../?mensaje=OkGrabar');
 }else{
     $data_usuario=[];
     if (isset($_GET['id-user'])){

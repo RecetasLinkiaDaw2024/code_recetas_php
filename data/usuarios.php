@@ -55,13 +55,45 @@ function findUsuarios($busqueda){
 function createUsuario($data){
     $conn = conectar_db();
     $stmt = $conn->prepare("insert INTO USUARIOS (nombre, clave_acceso, email,es_administrador) VALUES(?,?,?,?)");
-    $stmt->bind_param("sssi", $data['nombre'], $data['clave_acceso'], $data['email'],$data['es_administrador']);
+    $es_admin=false;
+    if (isset($data['es_administrador']) && $data['es_administrador']==true){
+        $es_admin=true;
+    }
+    $stmt->bind_param("sssi", $data['nombre'], $data['clave_acceso'], $data['email'],$es_admin);
 
     if (!$stmt->execute()) {
         die("Error al ejecutar el guardado: " . $stmt->error);
     }
     $stmt->close();
     $conn->close();
+}
+
+
+function verifica_email($email,$id){
+    $conn = conectar_db();
+    $stmt = $conn->prepare("select count(*) as cantidad from USUARIOS where email = ? and id_usuario<>?");
+    $idParam=0;
+    $retorno=false;
+    if (isset($id) && !empty($id)){
+        $idParam=$id;
+    }
+    $stmt->bind_param("si", $email,$idParam);
+    if (!$stmt->execute()) {
+        die("Error al ejecutar la consulta: " . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();    
+    
+    //solo se espera un resultado
+    if ($result->num_rows === 0) {
+        $retorno= false;
+    }else{
+        $cantidad = intval(($result->fetch_assoc())['cantidad']);
+        $retorno= $cantidad<=0;
+    }
+    $stmt->close();
+    $conn->close();
+    return $retorno;
 }
 /**
  * en $id esta el id de la Usuario a cambiar

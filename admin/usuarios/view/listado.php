@@ -132,8 +132,11 @@ if (isset($_GET['mensaje']) && $_GET['mensaje']=="OkErase" ){
         alert(\"Se ha eliminado el usuario correctamente\");
       });</script>";
 }
-
-
+if (isset($_GET['mensaje']) && $_GET['mensaje']=="NoOkEmail" ){
+    echo "<script> window.addEventListener('load', function() {
+        alert(\"No se ha podido grabar: el email ya existe en el sistema\");
+      });</script>";
+}
 
 ?>
 </body>
