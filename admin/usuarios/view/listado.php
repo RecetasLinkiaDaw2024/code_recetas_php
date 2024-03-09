@@ -98,8 +98,9 @@ button.link:hover{
             echo "<div class=\"panel_usuario\">";
             echo "<b>".$usuario['nombre']."</b>";
             echo "<p>".$usuario['email']."</p>";
+            echo "<p><b>".$usuario['count_recetas']."</b> recetas</p>";
             if($usuario['es_administrador'] == true){
-                echo "<p><b>Administrador<b></p>"; //TODO: darle una vuelta con colores o iconos, no solo la palabra
+                echo "<p><b>Administrador</b></p>"; //TODO: darle una vuelta con colores o iconos, no solo la palabra
             }
             echo "<br/>";
             echo "<form method=\"POST\" action=\"view/eliminar_usuario.php\" onsubmit=\"return confirm('¿Esta seguro de querer borrar a ".$usuario['nombre']."?');\">";
