@@ -1,39 +1,16 @@
 <?php
-require_once(__DIR__."../../code_recode_recetas_php/config/database.php");
-// Acceder a las constantes definidas en database.php
-$servername = DB_SERVER;
-$username = DB_USER;
-$password = DB_PASS;
-$dbname = DB_DATABASE;
-$port = DB_PORT;
+require_once(__DIR__."/../security/controller/check_user.php");
+    //SIEMPRE, SIEMPRE, hay que poner un require_once de check_user.php o check_user_admin.php
+    //nos verifica que el usuario ha pasado por el login
+require_once(__DIR__."/../data/usuarios.php");
+//vamos a asumir que tenemos que obtener los datos de sesion.
+//la variable de sesion del usuario se obtiene con la función getUserLogado()
+$usuario_sesion= getUserLogado();
+$datos_user=getUsuarioById($usuario_sesion->getId());
+$nombre=$datos_user['nombre'];
+$correo=$datos_user['email'];
+$count_recetas=$datos_user['count_recetas'];
 
-// Usar variables para crear la conexión a la base de datos
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
-if ($conn->connect_error) {
-    die("La conexión ha fallado: " . $conn->connect_error);
-} else {
-    echo "Conexión exitosa!";
-}
-
-// Consulta SQL para obtener los datos del usuario
-$sql = "SELECT nombre, apellidos, correo FROM usuarios WHERE id = 1"; // Aquí deberías cambiar 'id = 1' por la condición que corresponda a tu caso
-
-$result = $conn->query($sql);
-
-// Verifica si se encontraron resultados
-if ($result->num_rows > 0) {
-    // Muestra los datos en el formulario
-    while ($row = $result->fetch_assoc()) {
-        $nombre = $row["nombre"];
-        $apellidos = $row["apellidos"];
-        $correo = $row["correo"];
-    }
-} else {
-    echo "No se encontraron resultados";
-}
-
-// Cierra la conexión
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +19,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> LasRecetasdeMaría.com</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="../public/css/estilo.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -88,7 +65,7 @@ $conn->close();
             </div>
             <div>
                 <h1 class="title">
-                <img src="logo.jpg" alt="Logo" class="logo">
+                <img src="../public/images/logo.jpg" alt="Logo" class="logo">
                 RecetasdeMaría.com
                 </h1>
                 <div class="spacer"></div> 
@@ -102,15 +79,14 @@ $conn->close();
             <form action="actualizarPerfil.php" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="name" name="name" value="<?php echo $nombre; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="lastname" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $apellidos; ?>">
+                    <input type="text" class="form-control" id="name" name="name" value="<?php echo $nombre; ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo Electrónico:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $correo; ?>">
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $correo; ?>" required>
+                </div>
+                <div class="mb-3">
+                    <p> <?= $count_recetas?> recetas publicadas</p>
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar perfil</button>
             </form>

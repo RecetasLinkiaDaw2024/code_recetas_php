@@ -2,7 +2,14 @@
 require_once("conexion_db.php");
 
 function getUsuarioById($id){
-    return getRegistroByID("select * from USUARIOS where id_usuario = ?",$id);
+    $query = "select u.*, COUNT(r.id_receta) as count_recetas from USUARIOS u left join RECETAS r on (r.id_autor=u.id_usuario) where id_usuario = ? group by 
+    u.id_usuario,
+    u.nombre,
+    u.clave_acceso,
+    u.email,
+    u.es_administrador
+     order by u.id_usuario ASC";
+    return getRegistroByID($query ,$id);
 }
 
 
