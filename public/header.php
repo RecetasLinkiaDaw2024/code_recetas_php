@@ -1,11 +1,11 @@
 <div class="back">
             <div class="menu container">
                 <div class="logo">
-                    <img src="images/logofinal.jpg" alt="logo">
+                    <img src="<?= DEPLOY_PATH?>/public/images/logofinal.jpg" alt="logo">
                 </div>
                 <input type="checkbox" id="menu" />
                 <label for="menu">
-                    <img src="images/menu.png" class="menu-icono" alt="">
+                    <img src="<?= DEPLOY_PATH?>/public/images/menu.png" class="menu-icono" alt="">
                 </label>
                 <nav class="navbar">
                     <ul>

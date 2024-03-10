@@ -5,6 +5,39 @@ function getIngredienteById($id){
     return getRegistroByID("select * from INGREDIENTES where id_ingrediente = ?",$id);
 }
 
+//obtenemos todos los ingredientes de una receta
+function getIngredientesByIdReceta($idReceta){
+  $query="select ir.*,i.tipo, i.nombre as nombre_ingrediente from 
+   INGREDIENTES_RECETA ir inner join INGREDIENTES i ON (i.id_ingrediente=ir.id_ingrediente) 
+   where ir.id_receta = ?";
+  $conn = conectar_db();
+
+  $stmt = $conn->prepare($query);
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $mysqli->error);
+    }    
+
+//BLOQUE DE BIND FILTROS , hay que hacerlo en el mismo oreden que las condiciones
+    if (!empty($idReceta)){
+        $stmt->bind_param("i", $idReceta);
+    }
+//  
+
+    if (!$stmt->execute()) {
+        die("Error al ejecutar la consulta: " . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();    
+    $rows = array();
+    while ($row = $result->fetch_assoc()) {
+        array_push($rows, $row);
+    }
+
+//cerramos todo    
+    $stmt->close();
+    $conn->close();
+    return $rows;
+}
 
 //TODO: Pendiente ver que filtros pueden hacer falta, por ahora solo el autor
 //TODO: Necesita una ordenación?
