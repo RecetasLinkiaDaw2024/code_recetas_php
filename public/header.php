@@ -1,3 +1,6 @@
+<?php
+require_once(__DIR__."/../config/settings.php");
+?>
 <div class="back">
             <div class="menu container">
                 <div class="logo">

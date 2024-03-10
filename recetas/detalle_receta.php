@@ -96,7 +96,6 @@ if (isset($_GET['id-receta'])){
                 echo $ingrediente['nombre_ingrediente']." (".$ingrediente['tipo']."), ".str_replace(".00","",$ingrediente['cantidad'])." ".$ingrediente['unidad_medida'].".";
                 echo "</li>";
             }
-
     ?>
             </ul>
         </section>
@@ -110,7 +109,7 @@ if (isset($_GET['id-receta'])){
             <p>Receta de <?= $detalle_receta['nombre_autor']?></p>
         </section>
     </article>
-    <footer>
+    <footer class="footer">
         <?php require(__DIR__."/../public/footer.php");?>
     </footer>
 </body>
