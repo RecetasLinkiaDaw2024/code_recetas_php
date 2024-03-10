@@ -9,8 +9,8 @@
                 </label>
                 <nav class="navbar">
                     <ul>
-                        <li><a href="#">Inicia Sesión</a></li>
-                        <li><a href="#">Registrate</a></li>
+                        <li><a href="../login/login.php">Inicia Sesión</a></li>
+                        <li><a href="../login/login.html">Registrate</a></li>
                     </ul>
                 </nav>
             </div>
