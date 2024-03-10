@@ -60,14 +60,14 @@ if (isset($_GET['id-receta'])){
         }
 
         section.receta > ul {
-            list-style-type: none;
+            list-style-type: disc;
             padding: 2px;
         }
-
-        section.receta > li {
-            margin-bottom: 5px;
-        }
-
+    li.ingrediente{
+        margin-bottom: 5px;
+        list-style-type: disc;
+        list-style: inside;
+    }
     </style>
 </head>
 <body class="detalle-receta">
@@ -92,8 +92,8 @@ if (isset($_GET['id-receta'])){
             <ul>
     <?php
             foreach ($listado_ingredientes as $ingrediente){
-                echo "<li>";//nombre_ingrediente, tipo, cantidad, unidad_medida
-                echo $ingrediente['nombre_ingrediente']." (".$ingrediente['tipo']."), ".str_replace(".00","",$ingrediente['cantidad'])." ".$ingrediente['unidad_medida'].".";
+                echo "<li class='ingrediente'>";//nombre_ingrediente, tipo, cantidad, unidad_medida
+                echo ucfirst($ingrediente['nombre_ingrediente'])." (".ucfirst($ingrediente['tipo'])."), ".str_replace(".00","",$ingrediente['cantidad'])." ".$ingrediente['unidad_medida'].".";
                 echo "</li>";
             }
     ?>
