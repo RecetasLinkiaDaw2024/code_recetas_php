@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 // Consulta SQL para obtener los datos del usuario
-$sql = "SELECT nombre, apellidos, correo FROM usuarios WHERE id = 1"; // Aquí deberías cambiar 'id = 1' por la condición que corresponda a tu caso
+$sql = "SELECT nombre, apellidos, correo FROM usuarios WHERE id = 1"; // Aquí deberíamos cambiar 'id = 1' por la condición que corresponda a nuestro caso
 
 $result = $conn->query($sql);
 
