@@ -4,7 +4,7 @@ require_once(__DIR__."/../config/settings.php");
 //SIEMPRE, SIEMPRE, hay que poner un require_once de check_user.php o check_user_admin.php
 //nos verifica que el usuario ha pasado por el login
 require_once(__DIR__."/../data/usuarios.php");
-require_once(__DIR__."/../../data/ingredientes.php");
+require_once(__DIR__."/../data/ingredientes.php");
 ?>
 
 
@@ -39,7 +39,7 @@ require_once(__DIR__."/../../data/ingredientes.php");
     </head>
     <body class="detalle-datos">
         <header>
-            <? php require(__DIR__ . "/../../public/header.php");?>
+            <?php require(__DIR__ . "/../public/header.php");?>
         </header>
     
         <h1>Los Users de las Recetas</h1>
@@ -76,7 +76,7 @@ require_once(__DIR__."/../../data/ingredientes.php");
     
             
             <article class="usuario_info">
-            <p>Numero de recetas publicadas: <?= $['count_recetas']; ?> </p>
+            <p>Numero de recetas publicadas: <?= $detalle_usuario['count_recetas'] ?> </p>
             </section>
 
 
