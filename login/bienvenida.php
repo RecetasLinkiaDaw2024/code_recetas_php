@@ -55,6 +55,7 @@ $user =getUserLogado();
                 if ($user->getIsAdmin() == true){
 
                     echo "<button type=\"button\" class=\"dos-botones\" onclick=\"window.location='../admin/usuarios'\">Administrar Usuarios</button>";
+                    echo "<button type=\"button\" class=\"dos-botones\" onclick=\"window.location='../admin/ingredientes'\">Administrar Ingredientes</button>";
                 }
                 ?>
                 </div>
