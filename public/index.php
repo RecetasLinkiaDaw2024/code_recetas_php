@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LasRecetasDeMAria</title>
-    <link rel="stylesheet" href="style.css">
+    <title>LasRecetasDeMaria</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
@@ -12,7 +12,7 @@
     include('header.php');
     ?>
     </header>
-    </section>
+    
     <section class="nosotros">
         <div class="nosotros-info container">
         <div class="nosotros-img">
@@ -42,6 +42,7 @@
             <P>Puedes enviarnos un email a <a href="mailto:recetasdemaria@linkia.com">recetasdemaria@linkia.com</a> o bién contactarnos en la sección de contacto.</P>
         </div>
         <hr>
+    </section>
         <footer class="footer">
             <?php
                 include ('footer.php');

@@ -1,6 +1,6 @@
 <?php
 //TODO: seguridad, aplicar para admistrador
-require_once(__DIR__."/../../../data/usuarios.php");
+require_once(__DIR__."/../../../data/ingredientes.php");
 require_once(__DIR__."/../../../security/controller/check_user_admin.php");
 
 ?>
@@ -30,7 +30,7 @@ require_once(__DIR__."/../../../security/controller/check_user_admin.php");
     min-width: 300px;
 }
 
-.panel_usuario{
+.panel_ingredientes{
     background: lightgrey;
     border: 1px;
     width: 200px;
@@ -82,7 +82,7 @@ button.link:hover{
             <i class="material-icons" title="Buscar">search</i>                
             </button>
             <button name="nuevo" value="Nuevo" onclick="window.location='view/formulario.php';return false;">
-            <span class="material-icons"  title="Nuevo usuario">person_add</span>                
+            <span class="material-icons"  title="Nuevo ingrediente">note_add</span>                
             </button>
             
         </div>  
@@ -90,27 +90,23 @@ button.link:hover{
 <div class="resultados_busqueda">
 <?php
         if (isset($_GET['busqueda'])){
-            $usuarios = findUsuarios($_GET['busqueda']);
+            $ingredientes = findIngredientes($_GET['busqueda']);
         }else{
-            $usuarios = findUsuarios(null);
+            $ingredientes = findIngredientes(null);
         }
-        foreach ($usuarios as $usuario) {
-            echo "<div class=\"panel_usuario\">";
-            echo "<b>".$usuario['nombre']."</b>";
-            echo "<p>".$usuario['email']."</p>";
-            echo "<p><b>".$usuario['count_recetas']."</b> recetas</p>";
-            if($usuario['es_administrador'] == true){
-                echo "<p><b>Administrador</b></p>"; //TODO: darle una vuelta con colores o iconos, no solo la palabra
-            }
+        foreach ($ingredientes as $ingrediente) {
+            echo "<div class=\"panel_ingredientes\">";
+            echo "<b>".$ingrediente['nombre']."</b>";
+            echo "<p>".$ingrediente['tipo']."</p>";
             echo "<br/>";
-            echo "<form method=\"POST\" action=\"view/eliminar_usuario.php\" onsubmit=\"return confirm('¿Esta seguro de querer borrar a ".$usuario['nombre']."?');\">";
-            echo "<button class=\"link link-editar\" name=\"editar\" value=\"editar\" onclick=\"window.location='view/formulario.php?id-user=".$usuario['id_usuario']."';return false;\">";
-            echo "    <span class=\"material-icons\"  title=\"Editar usuario\">edit</span>                ";
+            echo "<form method=\"POST\" action=\"view/eliminar_ingrediente.php\" onsubmit=\"return confirm('¿Esta seguro de querer borrar el ingrediente ".$ingrediente['nombre']."?');\">";
+            echo "<button class=\"link link-editar\" name=\"editar\" value=\"editar\" onclick=\"window.location='view/formulario.php?id-ingrediente=".$ingrediente['id_ingrediente']."';return false;\">";
+            echo "    <span class=\"material-icons\"  title=\"Editar ingrediente\">edit</span>                ";
             echo "</button>";
             echo "<button type=\"submit\" class=\"link\" name=\"eliminar\" value=\"Eliminar\" \">";
             echo "    <span class=\"material-icons\"  title=\"Editar usuario\">delete</span>                ";
             echo "</button>";
-            echo "<input type=\"hidden\" name=\"id_usuario\"  value=\"".$usuario['id_usuario']."\"/>"; 
+            echo "<input type=\"hidden\" name=\"id_ingrediente\"  value=\"".$ingrediente['id_ingrediente']."\"/>"; 
             echo "</form>";
             echo "</div>";
         }

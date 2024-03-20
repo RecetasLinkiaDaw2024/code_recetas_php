@@ -44,8 +44,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: stretch; /* Estirar las secciones para que tengan la misma altura */
-    height: 60vh;
-    margin-top: 200px;
+    max-height: 680px;
+    margin-top: 100px;
 }
 
 .form-container,
@@ -101,6 +101,43 @@ header {
 .login-container button:hover {
     background-color: #3498db;
 }
+
+.botonera{
+    display: flex;
+    justify-content: center;
+}
+
+.dos-botones{    
+    width: 40%;
+    margin: 5px;
+}
+
+.error-message {
+    background-color: #ffcccc;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px;
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px; 
+}
+
+.ok-message {
+    background-color: #ccffcc; 
+    color: #008000; 
+    border: 1px solid #008000; 
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px;
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px; 
+}
+
 
 /*ids */
 
