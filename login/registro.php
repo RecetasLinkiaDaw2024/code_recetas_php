@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__."/../config/settings.php");
 require_once(__DIR__."/../data/usuarios.php");
+require_once(__DIR__."/../images/botonMenu.php");
+
 // Verificar si se recibieron datos del formulario de registro
 $mensaje="";
 $estilo="error-message";

@@ -27,6 +27,7 @@ function findUsuarios($busqueda){
 
     $query = "select u.*, COUNT(r.id_receta) as count_recetas from USUARIOS u left join RECETAS r on (r.id_autor=u.id_usuario) $condiciones group by 
     u.id_usuario,
+    u.id_foto,
     u.nombre,
     u.clave_acceso,
     u.email,
@@ -77,8 +78,11 @@ function createUsuario($data){
     if (!$stmt->execute()) {
         die("Error al ejecutar el guardado: " . $stmt->error);
     }
+    $id_insertado = mysqli_insert_id($conn);
+
     $stmt->close();
     $conn->close();
+    return $id_insertado;
 }
 
 
@@ -137,8 +141,25 @@ function editUsuario($id, $data){
     $conn->close();
 }
 
-function deleteUsuario($id){ //TODO: eliminar lo que ha hecho el usuario???
-    return deleteRegistroByID("delete FROM USUARIOS WHERE id_usuario = ?",$id);
+function addFotoUsuario($id_usuario,$id_almacenamiento){
+    $conn = conectar_db();
+    $stmt = $conn->prepare("update USUARIOS SET id_foto = ? where id_usuario = ?");
+    $stmt->bind_param("ii", $id_almacenamiento,$id_usuario);
+    if (!$stmt->execute()) {
+        die("Error al ejecutar el guardado: " . $stmt->error);
+    }
+
+    $conn->close();
+}
+
+function deleteUsuario($id){ //TODO: eliminar lo que ha hecho el usuario (recetas, comentarios, likes...)???
+    //al menos la foto
+    $data=getUsuarioById($id);//obtengo todos los datos    
+    deleteRegistroByID("delete FROM USUARIOS WHERE id_usuario = ?",$id);
+    if (isset($data['id_foto'])){
+        deleteRegistroByID("delete FROM ALMACENAMIENTO WHERE id_almacenamiento = ?",$data['id_foto']);//borro la foto
+    }
+    //TODO borrar el archivo de disco
 }
 
 

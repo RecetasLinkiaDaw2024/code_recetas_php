@@ -51,7 +51,7 @@ function findIngredientes($busqueda){
     }
 //
 
-    $query = "select * from INGREDIENTES $condiciones order by id_ingrediente ASC";
+    $query = "select * from INGREDIENTES $condiciones order by nombre ASC";
     $stmt = $conn->prepare($query);
     if ($stmt === false) {
         die("Error al preparar la consulta: " . $mysqli->error);
