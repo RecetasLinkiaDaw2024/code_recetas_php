@@ -3,6 +3,7 @@ require_once(__DIR__."/../security/controller/check_user.php");
     //SIEMPRE, SIEMPRE, hay que poner un require_once de check_user.php o check_user_admin.php
     //nos verifica que el usuario ha pasado por el login
 require_once(__DIR__."/../data/usuarios.php");
+require_once(__DIR__."/../images/botonMenú.php");
 //vamos a asumir que tenemos que obtener los datos de sesion.
 //la variable de sesion del usuario se obtiene con la función getUserLogado()
 $usuario_sesion= getUserLogado();
@@ -11,36 +12,6 @@ $nombre=$datos_user['nombre'];
 $correo=$datos_user['email'];
 $count_recetas=$datos_user['count_recetas'];
 
-<<<<<<< HEAD
-// Usar variables para crear la conexión a la base de datos
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
-if ($conn->connect_error) {
-    die("La conexión ha fallado: " . $conn->connect_error);
-} else {
-    echo "Conexión exitosa!";
-}
-
-// Consulta SQL para obtener los datos del usuario
-$sql = "SELECT nombre, apellidos, correo FROM usuarios WHERE id = 1"; // Aquí deberíamos cambiar 'id = 1' por la condición que corresponda a nuestro caso
-
-$result = $conn->query($sql);
-
-// Verifica si se encontraron resultados
-if ($result->num_rows > 0) {
-    // Muestra los datos en el formulario
-    while ($row = $result->fetch_assoc()) {
-        $nombre = $row["nombre"];
-        $apellidos = $row["apellidos"];
-        $correo = $row["correo"];
-    }
-} else {
-    echo "No se encontraron resultados";
-}
-
-// Cierra la conexión
-$conn->close();
-=======
->>>>>>> b7118b655053c55076660092577ad855e933df84
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +87,7 @@ $conn->close();
                     <input type="email" class="form-control" id="email" name="email" value="<?php echo $correo; ?>" required>
                 </div>
                 <div class="mb-3">
-                    <p> <?= $count_recetas?> recetas publicadas</p>
+                    <p> <?= $count_recetas?> recetas publicadas:</p>
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar perfil</button>
             </form>

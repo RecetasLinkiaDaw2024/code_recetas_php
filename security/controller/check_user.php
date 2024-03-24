@@ -24,4 +24,8 @@ function getUserLogado(){
     }
 }
 
+function updateUserData($Usuario){
+
+
+}
 ?>
