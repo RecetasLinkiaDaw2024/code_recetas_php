@@ -43,6 +43,8 @@ if (isset($_GET['id-receta'])){
             padding: 0;
         }
 
+
+
         article.receta {
             width: 80%;
             margin: 50px auto;
@@ -90,6 +92,21 @@ if (isset($_GET['id-receta'])){
     label.no-disp{
        padding-left: 10px;
     }
+
+    .receta > h1{
+        text-transform: uppercase;
+        }
+
+    div.separador {
+        width: 100%;
+        height: 1px;
+        background-color: #ccc; /* Color gris */
+        margin: 10px 0; /* Espacio entre secciones */
+    }
+    .autor{
+        text-align : right;
+        font-style: italic;
+    }
     </style>
 </head>
 <body class="detalle-receta">
@@ -100,7 +117,7 @@ if (isset($_GET['id-receta'])){
     <article class="receta">
         <section class="receta">
             <h1><?= $detalle_receta['nombre']?></h1>
-            <p>Categoría: <?= $detalle_receta['categoria']?></p>
+            <p><b>Categoría:</b> <?= $detalle_receta['categoria']?></p>
         </section>
         <section class="receta imagen-receta">            
             <?php 
@@ -116,10 +133,11 @@ if (isset($_GET['id-receta'])){
             ?>
             
         </section>
+        <div class="separador"></div>
         <section class="receta">
-            <p>Dificultad: <?= $detalle_receta['dificultad']?></p>
-            <p>Tiempo: <?= $detalle_receta['tiempo']?> minutos</p>
-            <p>Para <?= $detalle_receta['comensales']?> comensales</p>
+            <p><b>Dificultad:</b> <?= $detalle_receta['dificultad']?></p>
+            <p><b>Tiempo:</b> <?= $detalle_receta['tiempo']?> minutos</p>
+            <p><b>Para <?= $detalle_receta['comensales']?> comensales</b></p>
         </section>
 
         <section class="receta">
@@ -136,13 +154,13 @@ if (isset($_GET['id-receta'])){
         </section>
         
         
-
+        <div class="separador"></div>
         <section class="receta">
             <h2>Modo de Preparación</h2>
             <p><?= str_replace(". ",".<br>",$detalle_receta['preparacion'])?></p>
         </section>
-
-        <section class="receta">
+        <div class="separador"></div>
+        <section class="receta autor">
             <p>Receta de <?= $detalle_receta['nombre_autor']?></p>
         </section>
     </article>
