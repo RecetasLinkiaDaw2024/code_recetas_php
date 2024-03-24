@@ -10,7 +10,7 @@ require_once(__DIR__."/../../data/almacenamiento.php");
 
 
 function lanza_error_404(){
-     // Si el archivo no existe, devolver un código de estado 404
+     // Si el archivo no existe, devolver un código de estado 404?
      http_response_code(404);
      echo "La imagen no se encontró.";
 }

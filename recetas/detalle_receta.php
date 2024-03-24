@@ -68,6 +68,27 @@ if (isset($_GET['id-receta'])){
         list-style-type: disc;
         list-style: inside;
     }
+
+    section.imagen-receta{                
+        width: 100%;        
+    }
+
+    img.imagen-receta{
+        width: auto; 
+        max-height: 400px; 
+        border: 4px solid #ddd; 
+        border-radius: 5px; 
+        align: center;
+    }
+
+    img.no-disp{
+        max-height: 200px !important; 
+        width: auto; 
+        opacity: 0.5;        
+    }
+    label.no-disp{
+       padding-left: 10px;
+    }
     </style>
 </head>
 <body class="detalle-receta">
@@ -80,7 +101,20 @@ if (isset($_GET['id-receta'])){
             <h1><?= $detalle_receta['nombre']?></h1>
             <p>Categoría: <?= $detalle_receta['categoria']?></p>
         </section>
-
+        <section class="receta imagen-receta">            
+            <?php 
+            if (isset($detalle_receta['id_foto'])){
+                echo "<img class=\"imagen-receta\" src=\"../services/fotos?id=".$detalle_receta['id_foto']."\" alt=\"Foto\">";
+               }else{
+                echo "<div class=\"no-disp\">";
+                echo "<img id=\"no-foto\" class=\"imagen-receta no-disp\" src=\"../public/images/no-image-av.png\" alt=\"Foto no disponible\">";                
+                echo "<br/>";
+                echo "<label class=\"no-disp\">Foto No disponible</label>";
+                echo "</div>";
+               }
+            ?>
+            
+        </section>
         <section class="receta">
             <p>Dificultad: <?= $detalle_receta['dificultad']?></p>
             <p>Tiempo: <?= $detalle_receta['tiempo']?> minutos</p>
@@ -99,6 +133,8 @@ if (isset($_GET['id-receta'])){
     ?>
             </ul>
         </section>
+        
+        
 
         <section class="receta">
             <h2>Modo de Preparación</h2>

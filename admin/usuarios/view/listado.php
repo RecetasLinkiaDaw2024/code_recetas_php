@@ -66,11 +66,14 @@ button.link:hover{
         border-radius: 50%; /* Hace que la imagen tenga forma de círculo */
         overflow: hidden; /* Recorta cualquier contenido que sobresalga de la forma */
         align: center;
+        background-color: transparent;
+        
     }
 
 img.imagen-redonda {
     height: auto;
     width: 100px;
+    background: transparent;
 }
 
 </style>
@@ -112,11 +115,13 @@ img.imagen-redonda {
             echo "<b>".$usuario['nombre']."</b>";
             echo "<p>".$usuario['email']."</p>";
             echo "<p><b>".$usuario['count_recetas']."</b> recetas</p>";
+            echo "<div class=\"imagen-redonda\">";
             if (isset($usuario['id_foto'])){
-                echo "<div class=\"imagen-redonda\">";
                 echo "<img class=\"imagen-redonda\" src=\"../../services/fotos?id=".$usuario['id_foto']."\" alt=\"Imagen Usuario\">";
-                echo "</div>";
-            }//TODO: img de no hay nadie?
+            }else{
+                echo "<img class=\"imagen-redonda\" src=\"../../public/images/no-image-av.png\" alt=\"Sin Imagen\">";
+            }
+            echo "</div>";
             if($usuario['es_administrador'] == true){
                 echo "<p><b>Administrador</b></p>"; //TODO: darle una vuelta con colores o iconos, no solo la palabra
             }
