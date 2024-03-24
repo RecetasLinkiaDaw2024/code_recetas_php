@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
                 $directorio_destino = RUTA_ALMACEN_ARCHIVOS."/".$nombre_sub_carpeta;                
                 $extension = pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION);
                 // Mover el archivo del directorio temporal al destino
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $directorio_destino."/" . $nombre_aleatorio.".".$extension)) {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], APP_ROOT."/".$directorio_destino."/" . $nombre_aleatorio.".".$extension)) {
                     // "El archivo ha sido subido correctamente.";
                     $hay_archivo_subido=true;
                 } else {
