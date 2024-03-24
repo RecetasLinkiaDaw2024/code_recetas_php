@@ -35,7 +35,7 @@ require_once(__DIR__."/../../../security/controller/check_user_admin.php");
     border: 1px;
     width: 200px;
     min-height: 120px;
-    max-height: 160px;
+    max-height: 300px;
     margin: 5px;
     text-align: center;
     position: relative;
@@ -58,6 +58,22 @@ button.link-editar{
 button.link:hover{
   text-decoration: none;
   background: #CCCCCC;
+}
+
+.imagen-redonda {
+        width: 200px; /* Ajusta el tamaño según sea necesario */
+        height: auto; /* Ajusta el tamaño según sea necesario */
+        border-radius: 50%; /* Hace que la imagen tenga forma de círculo */
+        overflow: hidden; /* Recorta cualquier contenido que sobresalga de la forma */
+        align: center;
+        background-color: transparent;
+        
+    }
+
+img.imagen-redonda {
+    height: auto;
+    width: 100px;
+    background: transparent;
 }
 
 </style>
@@ -99,6 +115,13 @@ button.link:hover{
             echo "<b>".$usuario['nombre']."</b>";
             echo "<p>".$usuario['email']."</p>";
             echo "<p><b>".$usuario['count_recetas']."</b> recetas</p>";
+            echo "<div class=\"imagen-redonda\">";
+            if (isset($usuario['id_foto'])){
+                echo "<img class=\"imagen-redonda\" src=\"../../services/fotos?id=".$usuario['id_foto']."\" alt=\"Imagen Usuario\">";
+            }else{
+                echo "<img class=\"imagen-redonda\" src=\"../../public/images/no-image-av.png\" alt=\"Sin Imagen\">";
+            }
+            echo "</div>";
             if($usuario['es_administrador'] == true){
                 echo "<p><b>Administrador</b></p>"; //TODO: darle una vuelta con colores o iconos, no solo la palabra
             }

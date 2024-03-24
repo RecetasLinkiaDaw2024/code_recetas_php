@@ -16,4 +16,7 @@ define("DEPLOY_PATH",'/code_recetas_php');
 //RUTA DE LA APLICACION EN DISCO
 define( "APP_ROOT", realpath( dirname( __DIR__."/../index.php" ) ).'/' );//ruta de despliegue de la aplicacion
 
+//ruta base almacenamiento de los rchivos
+define("RUTA_ALMACEN_ARCHIVOS",'/storage/fotos/' );
+
 ?>
