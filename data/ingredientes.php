@@ -80,6 +80,33 @@ function findIngredientes($busqueda){
     return $rows;
 }
 
+//TODO: Pendiente ver que filtros pueden hacer falta, por ahora solo el autor
+//TODO: Necesita una ordenación?
+function getComboIngredientes(){
+    $conn = conectar_db();
+
+    $query = "select id_ingrediente, nombre from INGREDIENTES order by id_ingrediente ASC";
+    $stmt = $conn->prepare($query);
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $mysqli->error);
+    }    
+
+    if (!$stmt->execute()) {
+        die("Error al ejecutar la consulta: " . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();    
+    $combo = array();
+    while ($row = $result->fetch_assoc()) {
+        $combo[$row['nombre']] = $row['id_ingrediente'];
+    }
+
+//cerramos todo    
+    $stmt->close();
+    $conn->close();
+    return $combo;
+}
+
 /**
  * $data es un array asociativo con los siguientes campos.
  * Si un campo es vacio, hay qwue mandarlo tb

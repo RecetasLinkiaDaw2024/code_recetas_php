@@ -56,6 +56,7 @@ $user =getUserLogado();
 
                     echo "<button type=\"button\" class=\"dos-botones\" onclick=\"window.location='../admin/usuarios'\">Administrar Usuarios</button>";
                     echo "<button type=\"button\" class=\"dos-botones\" onclick=\"window.location='../admin/ingredientes'\">Administrar Ingredientes</button>";
+                    echo "<button type=\"button\" class=\"dos-botones\" onclick=\"window.location='../recetas'\">Administrar Recetas</button>";
                 }
                 ?>
                 </div>

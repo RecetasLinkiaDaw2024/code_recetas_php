@@ -46,6 +46,47 @@ function findRecetas($id_autor){
     return $rows;
 }
 
+function findRecetasFiltrado($busqueda, $dificultad, $ingredientes){
+    $conn = conectar_db();
+
+//BLOQUE DE CONDICIONES  
+    $condiciones ="where R.id_autor=U.id_usuario AND IR.id_receta = R.id_receta AND I.id_ingrediente = IR.id_ingrediente ";
+    if (!empty($busqueda)){
+        $condiciones = $condiciones . " and R.nombre like '%". $busqueda ."%' ";
+    }
+    if (!empty($dificultad)){
+        $condiciones = $condiciones . " and UPPER(dificultad) like UPPER('%". $dificultad ."%') ";
+    }
+    if (!empty($ingredientes)){
+        foreach($ingredientes as $ing){
+            $condiciones = $condiciones . " and EXISTS(select 1 from INGREDIENTES_RECETA IR2 where IR2.id_receta = R.id_receta AND IR2.id_ingrediente = " .$ing . " ) ";
+        }
+    }
+
+    $query = "select R.*, U.nombre as nombre_autor, GROUP_CONCAT(I.nombre) AS ingredientes from RECETAS R, USUARIOS U, INGREDIENTES_RECETA IR, INGREDIENTES I $condiciones group by R.id_receta order by R.id_receta ASC";
+
+    $stmt = $conn->prepare($query);
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $mysqli->error);
+    }    
+
+    if (!$stmt->execute()) {
+        die("Error al ejecutar la consulta: " . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();    
+    $rows = array();
+    while ($row = $result->fetch_assoc()) {
+        array_push($rows, $row);
+    }
+
+//cerramos todo    
+    $stmt->close();
+    $conn->close();
+    return $rows;
+}
+
+
 /**
  * $data es un array asociativo con los siguientes campos.
  * Si un campo es vacio, hay qwue mandarlo tb
