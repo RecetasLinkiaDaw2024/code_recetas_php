@@ -3,6 +3,7 @@ session_start();
 require_once(__DIR__."/../config/settings.php");
 require_once(__DIR__."/../data/usuarios.php");
 require_once(__DIR__."/../security/model/usuario.php");
+require_once(__DIR__."/../images/botonMenu.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = login($_POST['login-email'],$_POST['login-password']);

@@ -3,7 +3,7 @@ require_once(__DIR__."/../security/controller/check_user.php");
     //SIEMPRE, SIEMPRE, hay que poner un require_once de check_user.php o check_user_admin.php
     //nos verifica que el usuario ha pasado por el login
 require_once(__DIR__."/../data/usuarios.php");
-require_once(__DIR__."/../images/botonMenú.php");
+require_once(__DIR__."/../images/botonMenu.php");
 //vamos a asumir que tenemos que obtener los datos de sesion.
 //la variable de sesion del usuario se obtiene con la función getUserLogado()
 $usuario_sesion= getUserLogado();

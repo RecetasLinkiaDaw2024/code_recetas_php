@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__."/../config/settings.php");
-require_once(__DIR__."/../images/botonMenú.php");
+require_once(__DIR__."/../images/botonMenu.php");
 ?>
 <div class="back">
             <div class="menu container">
