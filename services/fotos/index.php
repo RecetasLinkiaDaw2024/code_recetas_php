@@ -26,7 +26,7 @@ if (isset($_GET['id'])){
     }
 
     // Ruta del archivo de imagen
-    $ruta_archivo = $data['ruta']."/".$data['nombre'];
+    $ruta_archivo = APP_ROOT."/".$data['ruta']."/".$data['nombre'];
     $extension = pathinfo($data['nombre'], PATHINFO_EXTENSION);
 
     // Verificar si el archivo existe
