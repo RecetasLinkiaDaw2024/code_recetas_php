@@ -23,7 +23,7 @@ require_once(__DIR__."/../config/settings.php");
                     <div class="dropdown-content">
                         <a href="misDatos.php">Mis datos</a>
                         <a href="detalle_receta.php">Mis recetas</a>
-                        <a href="#">Buscador de recetas</a>
+                        <a href="../recetas/listado.php">Buscador de recetas</a>
                         <?php
                             // Verificar si el usuario es administrador
                             $isAdmin = false; // Supongamos que esta es la lógica para determinar si el usuario es administrador o no

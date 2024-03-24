@@ -252,8 +252,8 @@ option {
                     }
                   }
   
-                  generaAddList('ingrediente', $combo, $seleccionados, 'Ingredientes disponibles', 'Filtro por ingredientes');
                 }
+                generaAddList('ingrediente', $combo, $seleccionados, 'Ingredientes disponibles', 'Filtro por ingredientes');
               
             ?>
 
