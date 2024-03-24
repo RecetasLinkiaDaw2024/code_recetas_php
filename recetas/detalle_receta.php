@@ -4,6 +4,7 @@ require_once(__DIR__."/../security/controller/check_user.php");
 //nos verifica que el usuario ha pasado por el login
 require_once(__DIR__."/../data/recetas.php");
 require_once(__DIR__."/../data/ingredientes.php");
+require_once(__DIR__."/../images/botonMenú.php");
 //pantalla de solo lectura para ver cualquier receta, sea tuya o no
 //mostraremos varias secciones:
     // nombre y categoria
