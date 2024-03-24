@@ -3,7 +3,7 @@
 require_once(__DIR__."/../data/recetas.php");
 require_once(__DIR__."/../data/ingredientes.php");
 require_once(__DIR__."/../public/componentes.php");
-require_once(__DIR__."/../security/controller/check_user_admin.php");
+require_once(__DIR__."/../security/controller/check_user.php");
 
 ?>
 <!DOCTYPE html>
