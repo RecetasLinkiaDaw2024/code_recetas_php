@@ -25,6 +25,11 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     }
 }
 
+$tipos_ingredientes = [
+"lacteos","especies","condimento","espesantes","fruta",
+"frutos secos","legumbres","licor","marisco","masas","pescado","salsa","verdura","vino","otros"];
+
+
 ?>
 
 
@@ -66,7 +71,18 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" value="<?= $data_ingrediente['nombre'] ?>" required>
         <label for="email">Tipo:</label>
-        <input type="text" name="tipo" id="tipo" value="<?= $data_ingrediente['tipo'] ?>" required>
+        
+        <select name="tipo" id="tipo" required>
+            <?php
+                foreach ($tipos_ingredientes  as $valor){
+                    if ($valor == $data_ingrediente['tipo']){
+                        echo "<option value=\"$valor\" selected>$valor</option>";
+                    }else{
+                        echo "<option value=\"$valor\">$valor</option>";
+                    }
+                }
+            ?>
+        </select>
         <div class="botonera">
         <button type="submit" value="Guardar">
             <span class="material-icons-outlined">save</span><span>GUARDAR</span>
