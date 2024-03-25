@@ -34,7 +34,53 @@ if (isset($_GET['id-receta'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LasRecetasDeMaria</title>
         <link rel="stylesheet" href="../public/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <script src="js/likes.js"></script> 
+        <script>
+            const idReceta = "<?= $_GET['id-receta']?>";
+            window.onload = function() {
+                obtenerLikeODislikes(idReceta,'L').then(numLikes => {
+                     console.log('Número de likes:', numLikes);
+                     const botonUno = document.getElementById("span-like");
+                     botonUno.innerHTML = numLikes;
+                })
+                .catch(error => {
+                    console.error('Error al obtener el número de likes:', error);
+                });
+                obtenerLikeODislikes(idReceta,"D").then(numLikes => {
+                     console.log('Número de dislikes:', numLikes);
+                     const botonUno = document.getElementById("span-dislike");
+                     botonUno.innerHTML = numLikes;
+                })
+                .catch(error => {
+                    console.error('Error al obtener el número de likes:', error);
+                });
+                //hay que saber la preferencia del usuario
+                obtenerEleccionUsuario(idReceta).then(tipo => {
+                     console.log('tipo:', tipo);               
+                     const elementoLike = document.getElementById("boton-like");
+                     const elementoDisLike = document.getElementById("boton-dislike");      
+                     if (tipo!=null && tipo=='D'){
+                        elementoLike.classList.remove("boton-marcado");
+                        elementoDisLike.classList.add("boton-marcado");
+                     }else if (tipo!=null && tipo=='L'){
+                        elementoDisLike.classList.remove("boton-marcado");
+                        elementoLike.classList.add("boton-marcado");
+                     }else{
+                        elementoDisLike.classList.remove("boton-marcado");
+                        elementoLike.classList.remove("boton-marcado");
+                     }
+                })
+                .catch(error => {
+                    console.error('Error al obtener el número de likes:', error);
+                });
+            };
 
+            function hacerLike(){
+                insertOrEditLikeDis
+            }
+
+        </script>
         <style>
         .detalle-receta {
             font-family: Arial, sans-serif;
@@ -103,9 +149,43 @@ if (isset($_GET['id-receta'])){
         background-color: #ccc; /* Color gris */
         margin: 10px 0; /* Espacio entre secciones */
     }
-    .autor{
-        text-align : right;
+    .pie{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .boton {
+        /* Propiedades generales */
+        display: inline-block;
+        padding: 8px 8px;
+        border-radius: 10px;
+        text-align: center;
         font-style: italic;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+        background-color: #B5CEBD;
+        color: black; /* Blanco */
+  
+        /* Icono Material Icon */
+        &::before {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            font-family: 'Material Icons'; /* Importar la fuente de Material Icons */
+            font-weight: normal; /* Quitar negrita del icono */
+            font-style: normal; /* Quitar cursiva del icono */
+            text-transform: none; /* Evitar mayúsculas automáticas */
+            speak: none; /* Evitar que el lector de pantalla lea el icono */
+            line-height: 1; /* Alinear verticalmente el icono */
+            color: inherit; /* Color blanco heredado del botón */
+        }  
+    }
+
+    .boton-marcado{
+        background-color: rgb(81, 115, 81);
+        color: #ffffff; /* Blanco */
     }
     </style>
 </head>
@@ -160,7 +240,15 @@ if (isset($_GET['id-receta'])){
             <p><?= str_replace(". ",".<br>",$detalle_receta['preparacion'])?></p>
         </section>
         <div class="separador"></div>
-        <section class="receta autor">
+        <section class="receta pie">
+        <div class="botonera">
+        <button id="boton-like" value="Guardar" class="boton">
+            <span class="material-icons">thumb_up</span><span id="span-like">0</span>
+        </button>
+        <button value="Cancelar" id="boton-dislike" onclick="window.location='../';return false;" class="boton">
+            <span class="material-icons">thumb_down</span><span id="span-dislike">0</span>
+        </button>
+        </div>        
             <p>Receta de <?= $detalle_receta['nombre_autor']?></p>
         </section>
     </article>

@@ -6,7 +6,7 @@ require_once("conexion_db.php");
  */
 function getTipoLike($id_usuario, $id_receta){
     $conn = conectar_db();
-    $sql = "select * from LIKES where id_usuario = ? and id_receta= ?";
+    $query = "select * from LIKES where id_usuario = ? and id_receta= ?";
     $retorno = null;
     $stmt = $conn->prepare($query);
     if ($stmt === false) {
@@ -30,12 +30,12 @@ function getTipoLike($id_usuario, $id_receta){
 }
 
 function contarLikesReceta($id_receta){
-    $data=getRegistroByID("select count (*) as contado from LIKES where tipo = 'L' and id_receta = ? ",$id_receta);
+    $data=getRegistroByID("select count(*) as contado from LIKES where tipo = 'L' and id_receta = ? ",$id_receta);
     return $data['contado'];
 }
 
 function contarDisLikesReceta($id_receta){
-    $data=getRegistroByID("select count (*) as contado from LIKES where tipo = 'D' and id_receta = ? ",$id_receta);
+    $data=getRegistroByID("select count(*) as contado from LIKES where tipo = 'D' and id_receta = ? ",$id_receta);
     return $data['contado'];
 }
 
