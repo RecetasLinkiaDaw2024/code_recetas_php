@@ -38,6 +38,7 @@ if (isset($_GET['id-receta'])){
         <script src="js/likes.js"></script> 
         <script>
             const idReceta = "<?= $_GET['id-receta']?>";
+            var tipoLikeUser="";
             window.onload = function() {
                 obtenerLikeODislikes(idReceta,'L').then(numLikes => {
                      console.log('Número de likes:', numLikes);
@@ -55,11 +56,13 @@ if (isset($_GET['id-receta'])){
                 .catch(error => {
                     console.error('Error al obtener el número de likes:', error);
                 });
+
                 //hay que saber la preferencia del usuario
                 obtenerEleccionUsuario(idReceta).then(tipo => {
                      console.log('tipo:', tipo);               
                      const elementoLike = document.getElementById("boton-like");
                      const elementoDisLike = document.getElementById("boton-dislike");      
+                     tipoLikeUser=tipo;
                      if (tipo!=null && tipo=='D'){
                         elementoLike.classList.remove("boton-marcado");
                         elementoDisLike.classList.add("boton-marcado");
@@ -76,9 +79,57 @@ if (isset($_GET['id-receta'])){
                 });
             };
 
+
+
             function hacerLike(){
-                insertOrEditLikeDis
+                if (tipoLikeUser!=null && tipoLikeUser=='L'){
+                    eliminarLikeDislike(idReceta,'L').then(numLikes => {
+                     console.log('Número de likes:', numLikes);
+                     const botonUno = document.getElementById("span-like");
+                     botonUno.innerHTML = numLikes;
+                     tipoLikeUser=null;
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener el número de likes:', error);
+                    });                    
+
+                }else{
+                    lanzarLikeDislike(idReceta,'L').then(numLikes => {
+                     console.log('Número de likes:', numLikes);
+                     const botonUno = document.getElementById("span-like");
+                     botonUno.innerHTML = numLikes;
+                     tipoLikeUser='L';
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener el número de likes:', error);
+                    });    
+                }
             }
+
+            function hacerDisLike(){
+                if (tipoLikeUser!=null && tipoLikeUser=='D'){
+                    eliminarLikeDislike(idReceta,'D').then(numLikes => {
+                     console.log('Número de likes:', numLikes);
+                     const botonUno = document.getElementById("span-like");
+                     botonUno.innerHTML = numLikes;
+                     tipoLikeUser=null;
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener el número de likes:', error);
+                    });                    
+                }else{
+                    lanzarLikeDislike(idReceta,'D').then(numLikes => {
+                     console.log('Número de likes:', numLikes);
+                     const botonUno = document.getElementById("span-like");
+                     botonUno.innerHTML = numLikes;
+                     tipoLikeUser='D';
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener el número de likes:', error);
+                    });    
+                }
+            }
+
 
         </script>
         <style>
@@ -187,6 +238,9 @@ if (isset($_GET['id-receta'])){
         background-color: rgb(81, 115, 81);
         color: #ffffff; /* Blanco */
     }
+    .pie-texto{
+        margin-top: 15px;
+    }
     </style>
 </head>
 <body class="detalle-receta">
@@ -242,14 +296,19 @@ if (isset($_GET['id-receta'])){
         <div class="separador"></div>
         <section class="receta pie">
         <div class="botonera">
-        <button id="boton-like" value="Guardar" class="boton">
+        <button id="boton-like" class="boton" onclick="hacerLike();return false;">
             <span class="material-icons">thumb_up</span><span id="span-like">0</span>
         </button>
-        <button value="Cancelar" id="boton-dislike" onclick="window.location='../';return false;" class="boton">
+        <button id="boton-dislike" onclick="hacerDisLike();return false;" class="boton">
             <span class="material-icons">thumb_down</span><span id="span-dislike">0</span>
         </button>
-        </div>        
+        </div>   
+        <div class="pie-texto">
+            <a href="comentarios_receta.php?id-receta=<?= $_GET['id-receta']?>">Comentarios</a>
+        </div>
+        <div class="pie-texto">
             <p>Receta de <?= $detalle_receta['nombre_autor']?></p>
+        </div>
         </section>
     </article>
     <footer class="footer">

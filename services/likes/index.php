@@ -16,15 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Verificar si el JSON contiene el campo 'id-receta'
     if (isset($request_data['id-receta']) && isset($request_data['tipo'])) {
-
+        
         $userid=getUserLogado()->$id;
         $num_likes = 0;
-        if ($request_data['tipo'] == 'B'){
-            deleteLikeODislike($userid,$request_data['id-receta']);
-        }else{
-            //aqui hacemos like o dislike
-            insertOrEditLikeDis($userid, $request_data['id-receta'],$request_data['tipo']);
-        }
+           //aqui hacemos like o dislike
+        insertOrEditLikeDis($userid, $request_data['id-receta'],$request_data['tipo']);
+        
         if ($request_data['tipo'] == 'L'){
             $num_likes = contarLikesReceta($request_data['id-receta']);
         }else{

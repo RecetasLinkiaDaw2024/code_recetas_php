@@ -74,7 +74,7 @@ function disLikeAReceta($id_usuario, $id_receta){
  */
 function deleteLikeODislike($id_usuario, $id_receta){
     $conn = conectar_db();
-    $stmt = $conn->prepare("DELETE FORM LIKES WHERE id_receta=? AND id_usuario=?");
+    $stmt = $conn->prepare("DELETE FROM LIKES WHERE id_receta=? AND id_usuario=?");
 
     if ($stmt === false) {
         die("Error al preparar el borrado: " . $mysqli->error);
