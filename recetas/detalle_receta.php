@@ -304,7 +304,7 @@ if (isset($_GET['id-receta'])){
         </button>
         </div>   
         <div class="pie-texto">
-            <a href="comentarios_receta.php?id-receta=<?= $_GET['id-receta']?>">Comentarios</a>
+            <a href="comentarios/comentarios_receta.php?id-receta=<?= $_GET['id-receta']?>">Comentarios</a>
         </div>
         <div class="pie-texto">
             <p>Receta de <?= $detalle_receta['nombre_autor']?></p>

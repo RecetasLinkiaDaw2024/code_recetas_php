@@ -2,7 +2,7 @@
 require_once("conexion_db.php");
 
 function getRecetaById($id){
-    return getRegistroByID("select r.*,u.nombre as nombre_autor from RECETAS r inner join USUARIOS u on (u.id_usuario=r.id_autor) where id_receta = ?",$id);
+    return getRegistroByID("select r.*,u.nombre as nombre_autor, (select count(*) from COMENTARIOS where id_receta = r.id_receta) as num_comentarios from RECETAS r inner join USUARIOS u on (u.id_usuario=r.id_autor) where id_receta = ?",$id);
 }
 
 
