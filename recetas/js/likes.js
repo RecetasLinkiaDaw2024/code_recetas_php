@@ -1,7 +1,7 @@
-var urlBase ="..";
+var urlBase ="../..";
 //ESTA VARIABLE HAY QEU DEFINIRLA SI SE USA ESTE SCRIPT
 //ES TAN SENCILLO COMO EJECUTAR defineUrlBase("<?= DEPLOY_PATH?>"); en tu path
-// por defecto url relativa subiendo un directorio
+// por defecto url relativa subiendo dos  directorios
 
 
 function defineUrlBase(newUrl){
@@ -139,7 +139,7 @@ idSpanCounterLike="span-like",idSpaCounterDislike="span-dislike"){
    .catch(error => {
        console.error('Error al obtener el número de likes:', error);
    });
-   
+
    obtenerLikeODislikes(idReceta,"D").then(numLikes => {
         console.log('Número de dislikes:', numLikes);
         const botonUno = document.getElementById(idSpaCounterDislike);
