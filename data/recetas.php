@@ -63,7 +63,12 @@ function findRecetasFiltrado($busqueda, $dificultad, $ingredientes){
         }
     }
 
-    $query = "select R.*, U.nombre as nombre_autor, GROUP_CONCAT(I.nombre) AS ingredientes from RECETAS R, USUARIOS U, INGREDIENTES_RECETA IR, INGREDIENTES I $condiciones group by R.id_receta order by R.id_receta ASC";
+    $query = "select R.*, U.nombre as nombre_autor, GROUP_CONCAT(I.nombre) 
+    AS ingredientes, 
+    (select count(*) from LIKES L where L.tipo = 'L' and L.id_receta=R.id_receta) as num_likes,
+    (select count(*) from LIKES D where D.tipo = 'D' and D.id_receta=R.id_receta) as num_dis_likes  
+    from RECETAS R, USUARIOS U, INGREDIENTES_RECETA IR, 
+    INGREDIENTES I $condiciones group by R.id_receta order by R.id_receta ASC";
 
     $stmt = $conn->prepare($query);
     if ($stmt === false) {
