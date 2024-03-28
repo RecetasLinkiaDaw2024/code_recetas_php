@@ -1,6 +1,16 @@
+var urlBase ="..";
+//ESTA VARIABLE HAY QEU DEFINIRLA SI SE USA ESTE SCRIPT
+//ES TAN SENCILLO COMO EJECUTAR defineUrlBase("<?= DEPLOY_PATH?>"); en tu path
+// por defecto url relativa subiendo un directorio
+
+
+function defineUrlBase(newUrl){
+    urlBase=newUrl;
+}
+
 async function lanzarLikeDislike(idReceta,tipo) {
     // URL del servicio REST
-    const url = 'http://localhost/code_recetas_php/services/likes/index.php'; // la URL real de tu servicio REST
+    const url = urlBase+ '/services/likes/index.php'; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {
@@ -32,7 +42,7 @@ async function lanzarLikeDislike(idReceta,tipo) {
 
 async function eliminarLikeDislike(idReceta,tipo) {
     // URL del servicio REST
-    const url = 'http://localhost/code_recetas_php/services/likes/delete.php'; // la URL real de tu servicio REST
+    const url = urlBase+ '/services/likes/delete.php'; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {
@@ -63,7 +73,7 @@ async function eliminarLikeDislike(idReceta,tipo) {
 
 async function obtenerLikeODislikes(idReceta,tipo) {
     // URL del servicio REST
-    const url = 'http://localhost/code_recetas_php/services/likes?id-receta='+idReceta+"&tipo="+tipo; // la URL real de tu servicio REST
+    const url = urlBase+ '/services/likes?id-receta='+idReceta+"&tipo="+tipo; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {
@@ -91,8 +101,8 @@ async function obtenerLikeODislikes(idReceta,tipo) {
 }
 
 async function obtenerEleccionUsuario(idReceta) {
-    // URL del servicio REST
-    const url = 'http://localhost/code_recetas_php/services/likes/user-choice.php?id-receta='+idReceta; // la URL real de tu servicio REST
+    // URL del servicio REST    
+    const url = urlBase+ '/services/likes/user-choice.php?id-receta='+idReceta; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {

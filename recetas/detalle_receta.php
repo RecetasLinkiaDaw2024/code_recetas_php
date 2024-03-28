@@ -38,6 +38,7 @@ if (isset($_GET['id-receta'])){
         <script src="js/likes.js"></script> 
         <script>
             const idReceta = "<?= $_GET['id-receta']?>";
+            defineUrlBase("<?= DEPLOY_PATH?>");
             var tipoLikeUser="";
             window.onload = function() {
                 obtenerLikeODislikes(idReceta,'L').then(numLikes => {
