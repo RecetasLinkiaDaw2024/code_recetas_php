@@ -129,12 +129,31 @@ async function obtenerEleccionUsuario(idReceta) {
 }
 // Ejemplo de uso
 
-function recalcularLikes(idReceta){
+function recalcularLikes(idReceta,idBotonLike = "boton-like",idBotonDislike = "boton-dislike",
+idSpanCounterLike="span-like",idSpaCounterDislike="span-dislike"){
+    obtenerLikeODislikes(idReceta,'L').then(numLikes => {
+        console.log('Número de likes:', numLikes);
+        const botonUno = document.getElementById(idSpanCounterLike);
+        botonUno.innerHTML = numLikes;
+   })
+   .catch(error => {
+       console.error('Error al obtener el número de likes:', error);
+   });
+   
+   obtenerLikeODislikes(idReceta,"D").then(numLikes => {
+        console.log('Número de dislikes:', numLikes);
+        const botonUno = document.getElementById(idSpaCounterDislike);
+        botonUno.innerHTML = numLikes;
+   })
+   .catch(error => {
+       console.error('Error al obtener el número de likes:', error);
+   });
+
     //hay que saber la preferencia del usuario
     obtenerEleccionUsuario(idReceta).then(tipo => {
         console.log('tipo:', tipo);               
-        const elementoLike = document.getElementById("boton-like");
-        const elementoDisLike = document.getElementById("boton-dislike");      
+        const elementoLike = document.getElementById(idBotonLike);
+        const elementoDisLike = document.getElementById(idBotonDislike);      
         tipoLikeUser=tipo;
         if (tipo!=null && tipo=='D'){
            elementoLike.classList.remove("boton-marcado");

@@ -41,57 +41,20 @@ if (isset($_GET['id-receta'])){
             defineUrlBase("<?= DEPLOY_PATH?>");
             var tipoLikeUser="";
             window.onload = function() {
-                obtenerLikeODislikes(idReceta,'L').then(numLikes => {
-                     console.log('Número de likes:', numLikes);
-                     const botonUno = document.getElementById("span-like");
-                     botonUno.innerHTML = numLikes;
-                })
-                .catch(error => {
-                    console.error('Error al obtener el número de likes:', error);
-                });
-                obtenerLikeODislikes(idReceta,"D").then(numLikes => {
-                     console.log('Número de dislikes:', numLikes);
-                     const botonUno = document.getElementById("span-dislike");
-                     botonUno.innerHTML = numLikes;
-                })
-                .catch(error => {
-                    console.error('Error al obtener el número de likes:', error);
-                });
+                
 
                 recalcularLikes(idReceta);
             };
 
-            function colorearLike(color){
-                const elementoLike = document.getElementById("boton-like");      
-                const elementoDisLike = document.getElementById("boton-dislike");      
-                if (color === true){
-                    elementoDisLike.classList.remove("boton-marcado");
-                    elementoLike.classList.add("boton-marcado");
-                }else{
-                    elementoLike.classList.remove("boton-marcado");
-                }
-            }
-
-            function colorearDisLike(color){
-                const elementoLike = document.getElementById("boton-like");      
-                const elementoDisLike = document.getElementById("boton-dislike");      
-                if (color === true){
-                    elementoLike.classList.remove("boton-marcado");
-                    elementoDisLike.classList.add("boton-marcado");
-                }else{
-                    elementoDisLike.classList.remove("boton-marcado");
-                }
-            }
+            
 
             function hacerLike(){
                 
                 if (tipoLikeUser!=null && tipoLikeUser=='L'){
                     eliminarLikeDislike(idReceta,'L').then(numLikes => {
-                     console.log('Número de likes:', numLikes);
-                     const botonUno = document.getElementById("span-like");
-                     botonUno.innerHTML = numLikes;
+                     console.log('Número de likes:', numLikes);                     
                      tipoLikeUser=null;
-                     colorearLike(false);
+                     recalcularLikes(idReceta);
                     })
                     .catch(error => {
                         console.error('Error al obtener el número de likes:', error);
@@ -100,10 +63,8 @@ if (isset($_GET['id-receta'])){
                 }else{
                     lanzarLikeDislike(idReceta,'L').then(numLikes => {
                      console.log('Número de likes:', numLikes);
-                     const botonUno = document.getElementById("span-like");
-                     botonUno.innerHTML = numLikes;
                      tipoLikeUser='L';
-                     colorearLike(true);
+                     recalcularLikes(idReceta);
                     })
                     .catch(error => {
                         console.error('Error al obtener el número de likes:', error);
@@ -116,10 +77,8 @@ if (isset($_GET['id-receta'])){
                 if (tipoLikeUser!=null && tipoLikeUser=='D'){
                     eliminarLikeDislike(idReceta,'D').then(numLikes => {
                      console.log('Número de dislike:', numLikes);
-                     const botonUno = document.getElementById("span-dislike");
-                     botonUno.innerHTML = numLikes;
                      tipoLikeUser=null;
-                     colorearDisLike(false);
+                     recalcularLikes(idReceta);
                     })
                     .catch(error => {
                         console.error('Error al obtener el número de likes:', error);
@@ -127,10 +86,8 @@ if (isset($_GET['id-receta'])){
                 }else{
                     lanzarLikeDislike(idReceta,'D').then(numLikes => {
                      console.log('Número de dislike:', numLikes);
-                     const botonUno = document.getElementById("span-dislike");
-                     botonUno.innerHTML = numLikes;
                      tipoLikeUser='D';
-                     colorearDisLike(true);
+                     recalcularLikes(idReceta);
                     })
                     .catch(error => {
                         console.error('Error al obtener el número de dislike:', error);
