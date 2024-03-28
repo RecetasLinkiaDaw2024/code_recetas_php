@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Verificar si el JSON contiene el campo 'id-receta'
     if (isset($request_data['id-receta']) && isset($request_data['tipo'])) {
-        
-        $userid=getUserLogado()->$id;
+        $user =getUserLogado();
+
+        $userid=$user->getId();
         $num_likes = 0;
            //aqui hacemos like o dislike
         insertOrEditLikeDis($userid, $request_data['id-receta'],$request_data['tipo']);

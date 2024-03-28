@@ -44,13 +44,14 @@ function contarDisLikesReceta($id_receta){
 */
 function insertOrEditLikeDis($id_usuario, $id_receta,$tipo){
     //vamos a ver si esto ya existe primero y hacemos insert o update en función
-    if (isnull(getTipoLike($id_usuario, $id_receta))){
+    $sql="";
+    if (is_null(getTipoLike($id_usuario, $id_receta))){
         $sql = "INSERT INTO LIKES (tipo,id_receta, id_usuario) VALUES(?,?,?)";
     }else{
         $sql = "UPDATE LIKES SET tipo=? WHERE id_receta=? AND id_usuario=?";
     }
     $conn = conectar_db();
-    $stmt = $conn->prepare();
+    $stmt = $conn->prepare( $sql );
     $stmt->bind_param("sii",$tipo, $id_receta, $id_usuario);
     if (!$stmt->execute()) {
         die("Error al ejecutar el guardado: " . $stmt->error);

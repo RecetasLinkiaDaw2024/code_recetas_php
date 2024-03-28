@@ -1,6 +1,6 @@
 async function lanzarLikeDislike(idReceta,tipo) {
     // URL del servicio REST
-    const url = '../services/likes'; // la URL real de tu servicio REST
+    const url = 'http://localhost/code_recetas_php/services/likes/index.php'; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {
@@ -18,7 +18,9 @@ async function lanzarLikeDislike(idReceta,tipo) {
         if (!response.ok) {
             throw new Error('Error al obtener el número de likes');
         }
-        const data = await response.json();
+        var responseString= await response.text();
+        console.log(responseString );
+        const data = JSON.parse(responseString);
         return data['num-likes'];
     } catch (error) {
         // Manejar errores
@@ -30,7 +32,7 @@ async function lanzarLikeDislike(idReceta,tipo) {
 
 async function eliminarLikeDislike(idReceta,tipo) {
     // URL del servicio REST
-    const url = '../services/likes/delete.php'; // la URL real de tu servicio REST
+    const url = 'http://localhost/code_recetas_php/services/likes/delete.php'; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {
@@ -48,7 +50,9 @@ async function eliminarLikeDislike(idReceta,tipo) {
         if (!response.ok) {
             throw new Error('Error al obtener el número de likes');
         }
-        const data = await response.json();
+        var responseString= await response.text();
+        console.log(responseString );
+        const data = JSON.parse(responseString);
         return data['num-likes'];
     } catch (error) {
         // Manejar errores
@@ -59,7 +63,7 @@ async function eliminarLikeDislike(idReceta,tipo) {
 
 async function obtenerLikeODislikes(idReceta,tipo) {
     // URL del servicio REST
-    const url = '../services/likes?id-receta='+idReceta+"&tipo="+tipo; // la URL real de tu servicio REST
+    const url = 'http://localhost/code_recetas_php/services/likes?id-receta='+idReceta+"&tipo="+tipo; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {
@@ -77,6 +81,7 @@ async function obtenerLikeODislikes(idReceta,tipo) {
             throw new Error('Error al obtener el número de likes');
         }
         const data = await response.json();
+
         return data['num-likes'];
     } catch (error) {
         // Manejar errores
@@ -87,7 +92,7 @@ async function obtenerLikeODislikes(idReceta,tipo) {
 
 async function obtenerEleccionUsuario(idReceta) {
     // URL del servicio REST
-    const url = '../services/likes/user-choice.php?id-receta='+idReceta; // la URL real de tu servicio REST
+    const url = 'http://localhost/code_recetas_php/services/likes/user-choice.php?id-receta='+idReceta; // la URL real de tu servicio REST
     
     // Configuración para la solicitud POST
     const requestOptions = {
@@ -113,6 +118,29 @@ async function obtenerEleccionUsuario(idReceta) {
     }
 }
 // Ejemplo de uso
+
+function recalcularLikes(idReceta){
+    //hay que saber la preferencia del usuario
+    obtenerEleccionUsuario(idReceta).then(tipo => {
+        console.log('tipo:', tipo);               
+        const elementoLike = document.getElementById("boton-like");
+        const elementoDisLike = document.getElementById("boton-dislike");      
+        tipoLikeUser=tipo;
+        if (tipo!=null && tipo=='D'){
+           elementoLike.classList.remove("boton-marcado");
+           elementoDisLike.classList.add("boton-marcado");
+        }else if (tipo!=null && tipo=='L'){
+           elementoDisLike.classList.remove("boton-marcado");
+           elementoLike.classList.add("boton-marcado");
+        }else{
+           elementoDisLike.classList.remove("boton-marcado");
+           elementoLike.classList.remove("boton-marcado");
+        }
+   })
+   .catch(error => {
+       console.error('Error al obtener el número de likes:', error);
+   });
+}
 
 /*
 const idReceta = 'ID_DE_LA_RECETA'; // Reemplaza 'ID_DE_LA_RECETA' por el ID real de la receta
